@@ -53,7 +53,7 @@ import java.util.List;
         private Class user_std_class;
 
         @Nullable
-        @Column(name = "user_std_parent", nullable = true)
+        @Column(name = "user_std_parent")
         private Integer user_std_parent;
 
         @JsonIgnore
@@ -96,6 +96,22 @@ import java.util.List;
                     '}';
         }
 
+        public String getRole(){
+            if (!user_teacher_flag && !user_student_flag && user_parent_flag){
+                return "PARENT";
+            }
+            if (user_teacher_flag && user_student_flag && user_parent_flag){
+                return "ADMIN";
+            }
+            if (user_teacher_flag && !user_student_flag && user_parent_flag){
+                return "TEACHER";
+            }
+            if (!user_teacher_flag && user_student_flag && !user_parent_flag){
+                return "STUDENT";
+            }
+            return "Error";
+
+        }
         public Integer getUser_id() {
             return user_id;
         }
