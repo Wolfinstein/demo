@@ -18,8 +18,7 @@ public class TokenUser extends org.springframework.security.core.userdetails.Use
         return user;
     }
 
-    public String getRole()
-    {
+    public String getRole() {
         return user.getRoles();
     }
 

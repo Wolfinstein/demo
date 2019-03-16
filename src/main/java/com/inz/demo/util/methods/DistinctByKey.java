@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 
 public class DistinctByKey {
 
-    private DistinctByKey(){
+    private DistinctByKey() {
     }
 
     public static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {

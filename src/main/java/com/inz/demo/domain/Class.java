@@ -22,18 +22,18 @@ public class Class {
 
     @OneToOne(targetEntity = User.class)
     @JoinColumn(name = "teacher")
-    private User teacher; // wychowawca
+    private User preceptor;
 
     @Column(name = "class_year")
     private int classYear;
 
-    @Column(name = "class_sign", length = 10)
+    @Column(name = "class_sign", length = 2)
     private String classSign;
 
     @OneToMany(mappedBy = "userClass", fetch = FetchType.LAZY)
     private List<User> users = new ArrayList<>();
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "lessonClass")
-    private List<Lesson> lessons;
+    @OneToMany(mappedBy = "subjectClass", fetch = FetchType.LAZY)
+    private List<Subject> subjects = new ArrayList<>();
+
 }

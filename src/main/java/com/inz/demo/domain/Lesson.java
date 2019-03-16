@@ -1,6 +1,5 @@
 package com.inz.demo.domain;
 
-import com.inz.demo.domain.enums.Subject;
 import lombok.*;
 
 import javax.persistence.*;
@@ -30,7 +29,8 @@ public class Lesson {
     @Column(name = "lesson_topic")
     private String topic;
 
-    @Column(name = "subject")
+    @JoinColumn(name = "subject")
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Subject.class)
     private Subject subject;
 
     @OneToMany(mappedBy = "lesson", orphanRemoval = true)

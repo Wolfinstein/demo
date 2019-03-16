@@ -2,6 +2,7 @@ package com.inz.demo.domain;
 
 import com.inz.demo.domain.enums.AbsenceType;
 import lombok.*;
+
 import javax.persistence.*;
 import java.util.Date;
 

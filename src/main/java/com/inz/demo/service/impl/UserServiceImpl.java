@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+import static com.inz.demo.util.methods.SplitIntegers.splitStringToIntArrays;
+
 @Service
 public class UserServiceImpl implements IUserService {
 
@@ -52,8 +54,7 @@ public class UserServiceImpl implements IUserService {
             userRepository.save(user);
             User addKids = userRepository.findByUserLogin(userDTO.getLogin()).get();
 
-            int[] arr = Arrays.stream(userDTO.getKidsIds().substring(1, userDTO.getKidsIds().length() - 1).split(","))
-                    .map(String::trim).mapToInt(Integer::parseInt).toArray();
+            int[] arr = splitStringToIntArrays(userDTO.getKidsIds());
             List<UserKids> kids = new ArrayList<>();
             for (int id : arr) {
                 kids.add(UserKids.builder()
