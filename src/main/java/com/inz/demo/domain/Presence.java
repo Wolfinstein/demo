@@ -1,6 +1,5 @@
 package com.inz.demo.domain;
 
-import com.inz.demo.domain.enums.PresenceType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -34,6 +33,6 @@ public class Presence {
     @Column(name = "presence_modification", length = 50)
     private Date date;
 
-    @Column(name = "presence_type")
-    private PresenceType type;
+    @Column(name = "presence_type", length = 50)
+    private String type;
 }

@@ -61,7 +61,6 @@ public class ClassServiceImpl implements IClassService {
                 .name(subjectDTO.getName())
                 .teacher(userRepository.findByUserId(subjectDTO.getTeacherId()))
                 .subjectTimeStart(subjectDTO.getSubjectTimeStart())
-                .subjectTimeEnd(subjectDTO.getSubjectTimeEnd())
                 .build();
         List<Subject> subjects = _class.getSubjects();
         subjects.add(subject);

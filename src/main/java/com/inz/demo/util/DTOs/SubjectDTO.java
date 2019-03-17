@@ -12,5 +12,4 @@ public class SubjectDTO {
     private String name;
     private Long teacherId;
     private String subjectTimeStart;
-    private String subjectTimeEnd;
 }

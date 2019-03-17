@@ -33,9 +33,6 @@ public class Subject {
     @Column(name = "subject_date_start")
     private String subjectTimeStart;
 
-    @Column(name = "subject_date_end")
-    private String subjectTimeEnd;
-
     @OneToMany(mappedBy = "lessonClass")
     private List<Lesson> lessons;
 }

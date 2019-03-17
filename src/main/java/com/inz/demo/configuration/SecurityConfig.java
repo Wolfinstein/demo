@@ -35,12 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(new VerifyTokenFilter(tokenUtil), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new GenerateTokenForUserFilter("/session", authenticationManager(), tokenUtil), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("/**", "/session", "/home/**", "/login/**", "/logout/**", "/users/**", "/user/**")
-                .permitAll()
-                .antMatchers()
-                .hasAnyAuthority("USER", "ADMIN", "MANAGER")
-                .anyRequest()
-                .authenticated();
+                .antMatchers("/**", "/session", "/home/**", "/login/**", "/logout/**", "/users/**", "/user/**", "/swagger-ui/**")
+                .permitAll();
     }
 
     @Override

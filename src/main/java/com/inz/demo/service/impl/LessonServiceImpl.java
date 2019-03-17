@@ -2,7 +2,6 @@ package com.inz.demo.service.impl;
 
 import com.inz.demo.domain.Lesson;
 import com.inz.demo.domain.Presence;
-import com.inz.demo.domain.enums.PresenceType;
 import com.inz.demo.repository.*;
 import com.inz.demo.service.ILessonService;
 import com.inz.demo.service.INotificationService;
@@ -51,11 +50,11 @@ public class LessonServiceImpl implements ILessonService {
                     .lesson(lessonRepository.getOne(lessonId))
                     .student(userRepository.findByUserId(entry.getKey()))
                     .teacher(lessonRepository.getOne(lessonId).getSubject().getTeacher())
-                    .type(PresenceType.valueOf(entry.getValue()))
+                    .type(entry.getValue())
                     .build();
             presenceList.add(presence);
 
-            if (presence.getType().equals(PresenceType.ABSENT)) {
+            if (presence.getType().equals("ABSENT")) {
                 notificationService.absenceNotification(presence.getStudent(), lessonId);
             }
         }
@@ -65,7 +64,7 @@ public class LessonServiceImpl implements ILessonService {
     @Override
     public void changePresence(Long presenceId, String presenceType) {
         Presence presence = presenceRepository.getOne(presenceId);
-        presence.setType(PresenceType.valueOf(presenceType));
+        presence.setType(presenceType);
         presence.setDate(Calendar.getInstance().getTime());
         presenceRepository.save(presence);
     }

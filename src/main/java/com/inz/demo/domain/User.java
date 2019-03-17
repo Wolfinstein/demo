@@ -24,10 +24,10 @@ public class User {
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(name = "user_login", nullable = false, length = 30)
+    @Column(name = "user_login", nullable = false, length = 100)
     private String userLogin;
 
-    @Column(name = "user_password", nullable = false, length = 50)
+    @Column(name = "user_password", nullable = false, length = 100)
     private String userPassword;
 
     @Column(name = "user_teacher_flag")
@@ -39,28 +39,28 @@ public class User {
     @Column(name = "user_parent_flag")
     private Boolean isUserParent;
 
-    @Column(name = "user_name", nullable = false, length = 30)
+    @Column(name = "user_name", nullable = false, length = 100)
     private String userName;
 
-    @Column(name = "user_surname", nullable = false, length = 50)
+    @Column(name = "user_surname", nullable = false, length = 100)
     private String userSurname;
 
-    @Column(name = "user_email", nullable = false, length = 50)
+    @Column(name = "user_email", nullable = false, length = 100)
     private String userEmail;
 
-    @Column(name = "user_phone", nullable = false, length = 50)
+    @Column(name = "user_phone", nullable = false, length = 100)
     private String phoneNumber;
 
-    @Column(name = "user_add_date", nullable = false, length = 50)
+    @Column(name = "user_add_date", nullable = false, length = 100)
     private Date userTimestamp;
 
-    @Column(name = "user_birth_date")
+    @Column(name = "user_birth_date", nullable = false, length = 100)
     private Date birthDate;
 
-    @Column(name = "user_mod_date", length = 50)
+    @Column(name = "user_mod_date", nullable = false, length = 100)
     private Date userModificationDate;
 
-    @ManyToOne(targetEntity = User.class)
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_parent_id")
     private User userParent;
 
