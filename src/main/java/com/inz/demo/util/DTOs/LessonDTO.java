@@ -7,10 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SubjectDTO {
-
-    private String name;
-    private Long teacherId;
-    private String subjectTimeStart;
-    private String subjectTimeEnd;
+public class LessonDTO {
+    private Long classId;
+    private Long subjectId;
+    private String topic;
 }

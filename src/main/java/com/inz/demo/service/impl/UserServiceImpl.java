@@ -1,7 +1,7 @@
 package com.inz.demo.service.impl;
 
 import com.inz.demo.domain.User;
-import com.inz.demo.domain.UserKids;
+import com.inz.demo.domain.UserKid;
 import com.inz.demo.repository.ClassRepository;
 import com.inz.demo.repository.UserRepository;
 import com.inz.demo.service.IUserService;
@@ -9,7 +9,10 @@ import com.inz.demo.util.DTOs.UserDTO;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Optional;
 
 import static com.inz.demo.util.methods.SplitIntegers.splitStringToIntArrays;
 
@@ -55,9 +58,9 @@ public class UserServiceImpl implements IUserService {
             User addKids = userRepository.findByUserLogin(userDTO.getLogin()).get();
 
             int[] arr = splitStringToIntArrays(userDTO.getKidsIds());
-            List<UserKids> kids = new ArrayList<>();
+            List<UserKid> kids = new ArrayList<>();
             for (int id : arr) {
-                kids.add(UserKids.builder()
+                kids.add(UserKid.builder()
                         .kid(userRepository.findByUserId((long) id))
                         .user(addKids)
                         .build());

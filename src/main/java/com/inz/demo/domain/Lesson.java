@@ -34,6 +34,6 @@ public class Lesson {
     private Subject subject;
 
     @OneToMany(mappedBy = "lesson", orphanRemoval = true)
-    private List<Absence> userAbsences;
+    private List<Presence> userPresences;
 
 }

@@ -70,7 +70,7 @@ public class User {
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", orphanRemoval = true)
-    private List<UserKids> userKids = new ArrayList<>();
+    private List<UserKid> userKids = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", orphanRemoval = true)

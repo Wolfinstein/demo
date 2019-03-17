@@ -27,13 +27,16 @@ public class Grade {
     @ManyToOne(fetch = FetchType.LAZY)
     private User student;
 
-    @Column(name = "gr_mod_date", length = 50)
+    @JoinColumn(name = "subject_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Subject subject;
+
+    @Column(name = "grade_modification_date", length = 50)
     private Date gradeModificationDate;
 
-    @Column(name = "gr_add_date", length = 50)
+    @Column(name = "grade_timestamp", length = 50)
     private Date gradeTimestamp;
 
-    @Column(name = "gr_grade")
+    @Column(name = "grade_value")
     private Double gradeValue;
-
 }

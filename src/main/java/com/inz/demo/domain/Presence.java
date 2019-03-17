@@ -1,23 +1,23 @@
 package com.inz.demo.domain;
 
-import com.inz.demo.domain.enums.AbsenceType;
+import com.inz.demo.domain.enums.PresenceType;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "absences")
+@Table(name = "presences")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @ToString
-public class Absence {
+public class Presence {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long absenceId;
+    private Long presenceId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher")
@@ -31,9 +31,9 @@ public class Absence {
     @JoinColumn(name = "lesson")
     private Lesson lesson;
 
-    @Column(name = "abs_date", length = 50)
+    @Column(name = "presence_modification", length = 50)
     private Date date;
 
-    @Column(name = "abs_type")
-    private AbsenceType type;
+    @Column(name = "presence_type")
+    private PresenceType type;
 }

@@ -8,8 +8,10 @@ import com.inz.demo.util.DTOs.SubjectDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -72,4 +74,23 @@ public class ClassController {
         }
     }
 
+    @PutMapping(value = "/subject/{subjectId}")
+    public ResponseEntity updateTeacher(@PathVariable Long subjectId, @Valid @RequestBody String teacherId, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        } else {
+            classService.changeTeacher(Long.valueOf(teacherId), subjectId);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
+
+    @PutMapping(value = "/class/{classId}")
+    public ResponseEntity updatePreceptor(@PathVariable Long classId, @Valid @RequestBody String preceptorId, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        } else {
+            classService.changePreceptor(Long.valueOf(preceptorId), classId);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
 }

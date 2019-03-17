@@ -47,7 +47,7 @@ public class ClassServiceImpl implements IClassService {
         Class _class = classRepository.findByClassId(classId).get();
         int[] arr = splitStringToIntArrays(studentIds);
         List<User> students = new ArrayList<>();
-        for (int _int: arr) {
+        for (int _int : arr) {
             students.add(userRepository.findByUserId((long) _int));
         }
         _class.setUsers(students);
@@ -93,4 +93,20 @@ public class ClassServiceImpl implements IClassService {
     public Optional<Subject> findSubjectById(Long id) {
         return subjectRepository.findById(id);
     }
+
+    @Override
+    public void changePreceptor(Long preceptorId, Long classId) {
+        Class _class = classRepository.findByClassId(classId).get();
+        _class.setPreceptor(userRepository.findByUserId(preceptorId));
+        classRepository.save(_class);
+    }
+
+    @Override
+    public void changeTeacher(Long teacherId, Long subjectId) {
+        Subject subject = subjectRepository.findById(subjectId).get();
+        subject.setTeacher(userRepository.findByUserId(teacherId));
+        subjectRepository.save(subject);
+    }
+
+
 }

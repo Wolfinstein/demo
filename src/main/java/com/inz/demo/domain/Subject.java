@@ -3,7 +3,6 @@ package com.inz.demo.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.util.List;
 
 @Entity
@@ -31,10 +30,10 @@ public class Subject {
     @JoinColumn(name = "class")
     private Class subjectClass;
 
-    @Column(name = "subject_date")
+    @Column(name = "subject_date_start")
     private String subjectTimeStart;
 
-    @Column(name = "subject_date")
+    @Column(name = "subject_date_end")
     private String subjectTimeEnd;
 
     @OneToMany(mappedBy = "lessonClass")

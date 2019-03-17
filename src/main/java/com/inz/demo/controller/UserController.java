@@ -4,6 +4,7 @@ import com.inz.demo.domain.User;
 import com.inz.demo.service.IUserService;
 import com.inz.demo.service.impl.UserServiceImpl;
 import com.inz.demo.util.DTOs.UserDTO;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -71,4 +72,5 @@ public class UserController {
             return new ResponseEntity<>(users, HttpStatus.OK);
         }
     }
-}
+
+ }
