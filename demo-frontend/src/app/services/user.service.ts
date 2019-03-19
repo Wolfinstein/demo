@@ -41,8 +41,11 @@ export class UserService {
     return this.apiRequest.post('users/add', user)
   }
 
-  getLogs() : Observable<any> {
+  getLogs(): Observable<any> {
     return this.apiRequest.get('logs');
   }
 
+  isNew(id: number): Observable<any> {
+    return this.apiRequest.get('notifications/color/' + id);
+  }
 }

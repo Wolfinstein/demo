@@ -35,4 +35,9 @@ public class NotificationController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping(value = "/notifications/color/{id}")
+    public ResponseEntity checkIfNew(@PathVariable Long id) {
+        return new ResponseEntity<>(notificationService.checkIfNew(id), HttpStatus.OK);
+    }
+
 }

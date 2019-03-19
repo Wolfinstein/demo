@@ -13,7 +13,7 @@
       <button mat-button color="accent" *ngIf="isStudent()" [routerLink]="'/student/' + user.userId">
         Student Panel
       </button>
-      <button mat-button color="accent" *ngIf="!isAdmin() && user?.isUserParent || !isAdmin() && user?.isUserStudent"
+      <button mat-button [ngStyle]="{'color' : empty === true ? 'red' : 'white' }" color="accent" *ngIf="!isAdmin() && user?.isUserParent || !isAdmin() && user?.isUserStudent"
               [routerLink]="'/notifications/' + user.userId">
         Notifications
       </button>

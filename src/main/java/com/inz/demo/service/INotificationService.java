@@ -18,4 +18,6 @@ public interface INotificationService {
     List<Notification> getNotifications(Long id);
 
     void changeStatus(Long id);
+
+    boolean checkIfNew(Long id);
 }

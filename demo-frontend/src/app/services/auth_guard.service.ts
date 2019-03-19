@@ -12,8 +12,15 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    const expectedRole : string = route.data[1].expectedRole;
     let url: string = state.url;
-    return this.checkLogin(url);
+
+    if(expectedRole == this.userInfoService.getUserInfo().role || expectedRole == 'ALL'){
+      return this.checkLogin(url);
+    }
+    else {
+      this.router.navigate(['404']);
+    }
   }
 
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {

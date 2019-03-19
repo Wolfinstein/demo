@@ -104,4 +104,10 @@ public class NotificationServiceImpl implements INotificationService {
         notification.setIsRead(!notification.getIsRead());
         notificationRepository.save(notification);
     }
+
+    @Override
+    public boolean checkIfNew(Long id) {
+        return notificationRepository.findByUser_UserId(id).stream().filter(Notification::getIsRead).collect(Collectors.toList()).isEmpty();
+
+    }
 }

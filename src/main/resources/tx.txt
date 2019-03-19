@@ -20,3 +20,112 @@ nauczyciele powinni móc dodawać oceny tylko z przedmiotów których nauczają 
 podział na role jest zjebany, user ma 3 flagi boolean 'czy rodzic' 'czy nauczyciel' 'czy uczeń', i odpowiednio je ustawiam, zrobiłęm tak że w kodzie jednym warunkiem po tych flagach określam role
 
 z resztą jak uznasz że coś jest zjebane to daje wolną rękę, najważniejsze żeby zostawić te śmieszne komunikaty w chwili dodania oceny uczniowi na konto rodzica leci notka że została dodana ocena
+
+
+CREATE OR REPLACE FUNCTION f_absences_log_del() RETURNS trigger
+  LANGUAGE plpgsql
+AS $$
+begin
+  insert into "logs"( "user_id", "table_name", "table_row_id", "log_date", "log_operation" ) values
+  ( old.user_id, 'Presences', old."table_row_id", current_date,  'Delete' );
+  return new;
+end;
+$$;
+
+
+CREATE OR REPLACE FUNCTION f_absences_log_ins() RETURNS trigger
+  LANGUAGE plpgsql
+AS $$begin
+  insert into logs( "user_id", "table_name", "table_row_id", "log_date", "log_operation" ) values
+  ( new."Abs_Teacher", 'Presences', new."table_row_id", current_date, current_time, 'Insert' );
+  return new;
+end;
+
+$$;
+--
+
+CREATE OR REPLACE FUNCTION f_absences_log_upd() RETURNS trigger
+  LANGUAGE plpgsql
+AS $$begin
+  insert into logs( "user_id", "table_name", "table_row_id", "log_date", "log_operation" ) values
+  ( new."user_id", 'Presences', old."table_row_id", current_date, current_time, 'Update' );
+  return new;
+end;
+$$;
+
+
+
+CREATE OR REPLACE FUNCTION f_grades_log_del() RETURNS trigger
+  LANGUAGE plpgsql
+AS $$begin
+  insert into logs( "user_id", "table_name", "table_row_id", "log_date", "log_operation" ) values
+  ( old."user_id", 'Grades', old."table_row_id", current_date, current_time, 'Delete' );
+  return new;
+
+end;
+$$;
+
+
+
+CREATE OR REPLACE FUNCTION f_grades_log_ins() RETURNS trigger
+  LANGUAGE plpgsql
+AS $$begin
+  insert into logs( "user_id", "table_name", "table_row_id", "log_date", "log_operation" ) values
+  ( new."user_id", 'Grades', new."table_row_id", current_date, current_time, 'Insert' );
+  return new;
+
+end;
+$$;
+
+
+CREATE OR REPLACE FUNCTION f_grades_log_upd() RETURNS trigger
+  LANGUAGE plpgsql
+AS $$begin
+  insert into logs( "user_id", "table_name", "table_row_id", "log_date", "log_operation" ) values
+  ( new."user_id", 'Grades', old."table_row_id", current_date, current_time, 'Update' );
+  return new;
+end;
+$$;
+
+
+
+CREATE TRIGGER t_absecses_log_ins AFTER INSERT ON presences FOR EACH ROW EXECUTE PROCEDURE f_absences_log_ins();
+
+
+--
+-- TOC entry 2779 (class 2620 OID 16476)
+-- Name: absences t_absecses_log_upd; Type: TRIGGER; Schema: school; Owner: postgres
+--
+
+CREATE TRIGGER t_absecses_log_upd AFTER UPDATE ON presences FOR EACH ROW EXECUTE PROCEDURE f_absences_log_upd();
+
+
+--
+-- TOC entry 2780 (class 2620 OID 16477)
+-- Name: absences t_absences_log_del; Type: TRIGGER; Schema: school; Owner: postgres
+--
+
+CREATE TRIGGER t_absences_log_del AFTER DELETE ON presences FOR EACH ROW EXECUTE PROCEDURE f_absences_log_del();
+
+
+-- Name: grades t_grades_log_del; Type: TRIGGER; Schema: school; Owner: postgres
+--
+
+CREATE TRIGGER t_grades_log_del AFTER DELETE ON grades FOR EACH ROW EXECUTE PROCEDURE f_grades_log_del();
+
+
+--
+-- TOC entry 2785 (class 2620 OID 16480)
+-- Name: grades t_grades_log_ins; Type: TRIGGER; Schema: school; Owner: postgres
+--
+
+CREATE TRIGGER t_grades_log_ins AFTER INSERT ON grades FOR EACH ROW EXECUTE PROCEDURE f_grades_log_ins();
+
+
+--
+-- TOC entry 2786 (class 2620 OID 16481)
+-- Name: grades t_grades_log_upd; Type: TRIGGER; Schema: school; Owner: postgres
+--
+
+CREATE TRIGGER t_grades_log_upd AFTER UPDATE ON grades FOR EACH ROW EXECUTE PROCEDURE f_grades_log_upd();
+

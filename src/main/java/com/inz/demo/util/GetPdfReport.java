@@ -120,6 +120,7 @@ public class GetPdfReport {
 
             // grades
             double allAverage = 0.0;
+            int counter = 0;
             for (Subject s : subjectList) {
                 cell = new PdfPCell(new Phrase(s.getName()));
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -143,6 +144,9 @@ public class GetPdfReport {
                         .average();
 
                 allAverage += average.orElse(0);
+                if (average.orElse(0) != 0) {
+                    counter++;
+                }
 
                 cell = new PdfPCell(new Phrase(grades.toString()));
                 cell.setPaddingLeft(5);
@@ -175,7 +179,7 @@ public class GetPdfReport {
             cell.setPaddingRight(5);
             tableGrade.addCell(cell);
 
-            cell = new PdfPCell(new Phrase(String.valueOf(allAverage / subjectList.size())));
+            cell = new PdfPCell(new Phrase(String.valueOf(allAverage / counter)));
             cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             cell.setPaddingRight(5);
