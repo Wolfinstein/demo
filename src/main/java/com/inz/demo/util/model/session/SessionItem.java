@@ -16,4 +16,7 @@ public class SessionItem {
     private String lastName;
     private String email;
     private String role;
+    private boolean isUserTeacher;
+    private boolean isUserParent;
+    private boolean isUserStudent;
 }

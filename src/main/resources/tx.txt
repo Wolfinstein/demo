@@ -1,0 +1,22 @@
+4 role: admin nauczyciel student rodzic
+admin może wszystko, tworzy klasy i plany lekcji, dodaje/edytuje użytkowników
+nauczyciel dodaje/edytuje oceny/nieobecnosci zmienia swoje dane
+rodzic uczen wyświetlają oceny nieobecnosci i komunikaty
+
+jeden rodzic moze miec wiele dzieci, nauczyciel moze byc rodzicem
+wpisywanie nieobecnosci powinno byc na jednym widoku dla całej klasy na raz, tzn wybieram przedmiot dzien godzine klase, i każdemu uczniowi z tej klasy moge ustawić nic tzn jest ok albo jakąś nieobecność
+godziny to INT <1:9>
+wyliczenie średniej ocen z każdego przedmiotu dla każdego ucznia i eksport listy ocen do PDF
+raportowanie nieobecnosci z podziałem na nieobecność usprawiedliwioną/nieusprawiedliwioną/spóźnienie
+wyświetlanie komunikatów (tworzą sie automatycznie w chwili dodawania ocen/nieobecnosci) trzeba je tylko wyświetlić z tabeli przypisane są do konkretnych użytkowników trzeba tylko flage zmieniac czy odczytane
+
+wymagana jest pewna kolejność w tworzeniu wpisów w bazie, administrator musi stworzyć najpier klase, bo każdy uczeń musi być stworzony z przypisaniem do klasy, nie moze być uczniów bez klasy
+każda klasa ma przypisanego jednego wychowawce
+
+nauczyciele powinni móc dodawać oceny tylko z przedmiotów których nauczają (obejdzie sie bez tego)
+
+śmieszna bezużyteczna tabelka z logami tylko do wyświetlenia zawartość adminowi w jakimś widoku jednym
+
+podział na role jest zjebany, user ma 3 flagi boolean 'czy rodzic' 'czy nauczyciel' 'czy uczeń', i odpowiednio je ustawiam, zrobiłęm tak że w kodzie jednym warunkiem po tych flagach określam role
+
+z resztą jak uznasz że coś jest zjebane to daje wolną rękę, najważniejsze żeby zostawić te śmieszne komunikaty w chwili dodania oceny uczniowi na konto rodzica leci notka że została dodana ocena

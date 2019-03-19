@@ -2,6 +2,8 @@ package com.inz.demo.service;
 
 import com.inz.demo.domain.User;
 import com.inz.demo.util.DTOs.UserDTO;
+import com.inz.demo.util.DTOs.UserDTOv2;
+import com.inz.demo.util.DTOs.UserTeacherUpdateDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,5 +21,9 @@ public interface IUserService {
 
     void deleteUser(Long id);
 
+    void updateTeacher(Long id, UserTeacherUpdateDTO user);
+
     void updateUser(Long id, User user);
+
+    UserDTOv2 convertUserToDTO(Long id);
 }

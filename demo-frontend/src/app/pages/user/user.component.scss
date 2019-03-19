@@ -1,0 +1,50 @@
+  .outer-card {
+    margin-top: 5em;
+    border-radius: 5px;
+  }
+
+  .outer-card-title {
+    text-align: center;
+  }
+
+  .inner-card-title {
+    text-align: center;
+  }
+
+  .outer-card-content {
+    margin-top: 4rem;
+    margin-right: 5%;
+    margin-left: 5%;
+  }
+
+  .inner-card-content {
+    margin-right: 5%;
+    margin-left: 5%;
+  }
+
+  .account-row {
+    display: flex;
+    margin-bottom: 0.5rem;
+  }
+
+
+  .account-options:hover {
+    cursor: pointer;
+  }
+
+  .info-icon {
+    width: 10rem;
+    height: 2rem;
+    font-size: 1.2rem;
+    color: #FFC107;
+  margin-left: 5vh;
+  }
+
+  //.mat-expansion-panel {
+  //  background: #FFC107;
+  //}
+
+  .account-paragraphs{
+    color: black  ;
+    font-size: 1.08rem;
+  }

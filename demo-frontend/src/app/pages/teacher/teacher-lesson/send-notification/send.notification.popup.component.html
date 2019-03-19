@@ -1,0 +1,11 @@
+<div class="dialog-panel"  mat-dialog-content>
+  <p class="text-dialog">
+    <mat-form-field color="background" appearance="outline">
+      <mat-label>Message</mat-label>
+      <input matInput placeholder="" [(ngModel)]="data.message" [defaultValue]="" required>
+    </mat-form-field>
+  </p>
+  <div mat-dialog-actions>
+    <button class="button-edit" mat-stroked-button color="accent" (click)="onSend()">Send</button>
+  </div>
+</div>

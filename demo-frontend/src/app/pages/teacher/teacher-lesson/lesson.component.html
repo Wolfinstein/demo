@@ -1,0 +1,93 @@
+<h3 class="lesson-title">List of lessons</h3>
+
+<div class="table-container">
+  <ngx-datatable
+    #lessonsTable
+    class="material striped"
+    [rows]="lessonsList"
+    [headerHeight]="45"
+    [rowHeight]="'auto'"
+    [columnMode]="'flex'"
+    [footerHeight]="30"
+    [limit]="10"
+  >
+    <ngx-datatable-column name="Topic" [flexGrow]="1">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <p class="grades" (dblclick)="editTopicPopup(row.id, row.topic)">{{row.topic}}</p>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Date" [flexGrow]="0.4">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row.date | date: 'short'}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column [flexGrow]="0.20">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <button mat-raised-button color="accent" [routerLink]="'/presences/' + row.id">Change Presence
+        </button>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column [flexGrow]="0.20">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <button mat-raised-button color="warn" (click)="deleteLesson(row.id)">Delete Lesson
+        </button>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+   <button class="add-lesson" mat-raised-button color="primary" (click)="addLesson()">Add Lesson</button>
+</div>
+
+<h3 class="lesson-title">List of students</h3>
+
+<div class="table-container lesson">
+  <ngx-datatable
+    #studentsTable
+    class="material striped"
+    [rows]="studentsList"
+    [headerHeight]="45"
+    [rowHeight]="'auto'"
+    [columnMode]="'flex'"
+    [footerHeight]="30"
+    [limit]="10"
+  >
+    <ngx-datatable-column name="Full Name" [flexGrow]="0.4">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row.name + " " + row.surname}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Grades" [flexGrow]="1">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <p (dblclick)="editGradePopup(sel.gradeId, sel.gradeValue)"
+           matTooltip="{{sel.gradeModificationDate | date : 'dd/MM/yyyy'}}"
+           class="grades" *ngFor='let sel of row.grades'>
+          {{sel.gradeValue + "       |"}}
+        </p>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Average" [flexGrow]="0.1">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row.average}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column [flexGrow]="0.25">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <button mat-raised-button color="accent"  (click)="addGrade(row.studentId)" >Add grade
+        </button>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column [flexGrow]="0.25">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <button mat-raised-button color="warn" (click)="sendNotification(row.studentId)">Send Notification
+        </button>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+
+</div>

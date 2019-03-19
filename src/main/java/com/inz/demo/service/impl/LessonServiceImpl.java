@@ -2,13 +2,17 @@ package com.inz.demo.service.impl;
 
 import com.inz.demo.domain.Lesson;
 import com.inz.demo.domain.Presence;
+import com.inz.demo.domain.Subject;
+import com.inz.demo.domain.User;
 import com.inz.demo.repository.*;
 import com.inz.demo.service.ILessonService;
 import com.inz.demo.service.INotificationService;
 import com.inz.demo.util.DTOs.LessonDTO;
+import com.inz.demo.util.DTOs.PresenceListDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class LessonServiceImpl implements ILessonService {
@@ -30,14 +34,30 @@ public class LessonServiceImpl implements ILessonService {
     }
 
     @Override
-    public void createLesson(LessonDTO lessonDTO) {
+    public void createLesson(Long id) {
+        Subject subject = subjectRepository.getOne(id);
+
         Lesson lesson = Lesson.builder()
                 .date(Calendar.getInstance().getTime())
-                .lessonClass(classRepository.getOne(lessonDTO.getClassId()))
-                .subject(subjectRepository.getOne(lessonDTO.getSubjectId()))
-                .topic(lessonDTO.getTopic())
+                .lessonClass(subject.getSubjectClass())
+                .subject(subject)
+                .topic("Change me")
                 .build();
+
         lessonRepository.save(lesson);
+
+        List<User> students = subject.getSubjectClass().getUsers();
+        List<Presence> presences = new ArrayList<>();
+        for (User s : students) {
+            presences.add(Presence.builder()
+                    .date(Calendar.getInstance().getTime())
+                    .lesson(lesson)
+                    .student(s)
+                    .teacher(subject.getTeacher())
+                    .type("PRESENT")
+                    .build());
+        }
+        presenceRepository.saveAll(presences);
     }
 
     @Override
@@ -89,6 +109,23 @@ public class LessonServiceImpl implements ILessonService {
         Lesson lesson = lessonRepository.getOne(lessonId);
         lesson.setTopic(topic);
         lessonRepository.save(lesson);
+    }
+
+    @Override
+    public List<PresenceListDTO> getPresencesList(Long id) {
+        List<Presence> presences = presenceRepository.findByLessonLessonId(id).stream().sorted((Comparator.comparing(o -> o.getStudent().getUserSurname()))).collect(Collectors.toList());
+        List<PresenceListDTO> dtos = new ArrayList<>();
+
+        for (Presence p : presences) {
+            dtos.add(PresenceListDTO.builder()
+                    .presenceType(p.getType())
+                    .name(p.getStudent().getUserName())
+                    .surname(p.getStudent().getUserSurname())
+                    .date(p.getDate())
+                    .id(p.getPresenceId())
+                    .build());
+        }
+        return dtos;
     }
 
 }

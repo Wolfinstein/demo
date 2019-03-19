@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 public class ClassDTO {
 
     private Long preceptorId;
-    private int classYear;
-    private String classSign;
+    private int year;
+    private String sign;
 }

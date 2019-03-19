@@ -43,7 +43,6 @@ export class ApiRequestService {
 
 
   download(url: string, params?: HttpParams): Observable<any> {
-    let me = this;
     return this.http.get(this.appConfig.baseApiPath + url, {
       responseType: 'blob',
       headers: this.getHeadersForUpload(),

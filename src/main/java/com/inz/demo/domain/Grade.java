@@ -1,5 +1,6 @@
 package com.inz.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,14 +20,17 @@ public class Grade {
     @Column(name = "grade_id")
     private Long gradeId;
 
+    @JsonIgnore
     @JoinColumn(name = "teacher_id")
     @ManyToOne(targetEntity = User.class)
     private User teacher;
 
+    @JsonIgnore
     @JoinColumn(name = "student_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private User student;
 
+    @JsonIgnore
     @JoinColumn(name = "subject_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Subject subject;

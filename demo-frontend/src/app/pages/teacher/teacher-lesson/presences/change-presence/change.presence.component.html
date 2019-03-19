@@ -1,0 +1,16 @@
+<div class="dialog-panel" mat-dialog-content>
+  <p class="text-dialog">
+    <mat-form-field appearance="outline">
+      <mat-label>Select an option</mat-label>
+      <mat-select [(value)]="data.presenceType">
+        <mat-option value="PRESENT">PRESENT</mat-option>
+        <mat-option value="ABSENT">ABSENT</mat-option>
+        <mat-option value="LATE">LATE</mat-option>
+        <mat-option value="JUSTIFIED">JUSTIFIED</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+  <div class="div-but" mat-dialog-actions>
+    <button class="button-edit" mat-stroked-button color="accent" (click)="onEdit()">Edit</button>
+  </div>
+</div>

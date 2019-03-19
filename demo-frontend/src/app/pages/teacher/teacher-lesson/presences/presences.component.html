@@ -1,0 +1,44 @@
+
+<h3 class="subjects-title">Presences</h3>
+
+
+<div class="table-container">
+  <ngx-datatable
+    #presencesTable
+    class="material striped"
+    [rows]="presencesList"
+    [headerHeight]="45"
+    [rowHeight]="'auto'"
+    [columnMode]="'flex'"
+    [footerHeight]="30"
+    [limit]="10"
+  >
+    <ngx-datatable-column name="Name" [flexGrow]="1">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row.name}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Surname" [flexGrow]="1">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row.surname}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Date" [flexGrow]="0.5">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row.date | date: 'dd/MM/yyyy'}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Type" [flexGrow]="0.4">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <p (dblclick)="editPresence(row.id, row.presenceType)">
+          {{row.presenceType}}
+        </p>
+      </ng-template>
+    </ngx-datatable-column>
+
+
+  </ngx-datatable>
+</div>

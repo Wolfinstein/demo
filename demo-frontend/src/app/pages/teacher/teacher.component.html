@@ -1,0 +1,57 @@
+
+<h3 class="subjects-title">My subjects</h3>
+
+<div class="table-container">
+<ngx-datatable
+  #subjectsTable
+  class="material striped"
+  [rows]="subjectsList"
+  [headerHeight]="45"
+  [rowHeight]="'auto'"
+  [columnMode]="'flex'"
+  [footerHeight]="30"
+  [limit]="10"
+>
+  <ngx-datatable-column name="Name" [flexGrow]="0.5">
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      {{row.name}}
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Class Sign" [flexGrow]="0.4">
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      {{row.classSign}}
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Class Year" [flexGrow]="0.4">
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      {{row.classYear}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="Class date" [flexGrow]="0.5">
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      {{row.classStart}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="Lessons" [flexGrow]="0.5">
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      {{row.lessonCounter}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="Kids" [flexGrow]="0.5">
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      {{row.kidsCounter}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column [flexGrow]="0.50">
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      <button mat-raised-button color="warn" [routerLink]="'/lesson/' + row.id">Show
+      </button>
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>
+
+</div>

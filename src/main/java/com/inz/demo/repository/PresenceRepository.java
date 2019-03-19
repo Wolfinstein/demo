@@ -9,7 +9,8 @@ import java.util.List;
 @Repository
 public interface PresenceRepository extends JpaRepository<Presence, Long> {
 
-    List<Presence> findByStudent_UserIdAndAndType(Long id, String type);
+    List<Presence> findByStudent_UserIdAndType(Long id, String type);
     List<Presence> findByStudent_UserId(Long id);
+    List<Presence> findByLessonLessonId(Long id);
 
 }

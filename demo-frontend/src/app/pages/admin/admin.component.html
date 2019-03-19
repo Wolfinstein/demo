@@ -1,0 +1,64 @@
+<mat-tab-group>
+  <mat-tab label="Classes">
+
+    <div class="table-container lesson">
+      <ngx-datatable
+        class="material striped"
+        [rows]="classesList"
+        [headerHeight]="45"
+        [rowHeight]="'auto'"
+        [columnMode]="'flex'"
+        [footerHeight]="30"
+        [limit]="5"
+      >
+        <ngx-datatable-column name="Id" [flexGrow]="0.1">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.id}}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Preceptor" [flexGrow]="0.3">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.fullName }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Year" [flexGrow]="0.2">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.year}}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Sign" [flexGrow]="0.2">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.sign}}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Subjects" [flexGrow]="0.2">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.subjectsAmount}}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Students" [flexGrow]="0.2">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.studentsAmount}}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="" [flexGrow]="0.2">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <button mat-stroked-button color="accent" (click)="editClassPopup(row)" >Edit</button>
+            <button mat-stroked-button color="warn" (click)="deleteClass(row.id)" >Delete</button>
+          </ng-template>
+        </ngx-datatable-column>
+
+      </ngx-datatable>
+      <button mat-raised-button color="warn" (click)="addClass()" >Add Class</button>
+    </div>
+
+  </mat-tab>
+  <mat-tab label="Users"> Users</mat-tab>
+  <mat-tab label="Subjects"> Subjects</mat-tab>
+</mat-tab-group>

@@ -4,6 +4,8 @@ import com.inz.demo.domain.Lesson;
 import com.inz.demo.service.ILessonService;
 import com.inz.demo.service.impl.LessonServiceImpl;
 import com.inz.demo.util.DTOs.LessonDTO;
+import com.inz.demo.util.DTOs.PresenceListDTO;
+import com.inz.demo.util.methods.QuotationStringCutter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,27 +23,21 @@ public class LessonController {
         this.lessonService = lessonService;
     }
 
-    @PostMapping(value = "/lesson/add")
-    public ResponseEntity createLesson(@RequestBody LessonDTO form) {
-        lessonService.createLesson(form);
+    @PostMapping(value = "/lesson/add/{id}")
+    public ResponseEntity createLesson(@PathVariable Long id) {
+        lessonService.createLesson(id);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PostMapping(value = "/checkPresence/{id}")
-    public ResponseEntity checkPresence(@RequestBody Map<Long, String> presences, @PathVariable Long id) {
-        lessonService.checkPresence(presences, id);
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
-    @PutMapping(value = "/changePresence/{id}")
+    @PutMapping(value = "/presences/edit/{id}")
     public ResponseEntity changePresence(@PathVariable Long id, @RequestBody String presenceType) {
-        lessonService.changePresence(id, presenceType);
+        lessonService.changePresence(id, QuotationStringCutter.cutString(presenceType));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping(value = "/changeTopic/{id}")
+    @PutMapping(value = "/lesson/changeTopic/{id}")
     public ResponseEntity changeTopic(@PathVariable Long id, @RequestBody String topic) {
-        lessonService.updateTopic(topic, id);
+        lessonService.updateTopic(QuotationStringCutter.cutString(topic), id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -73,5 +69,16 @@ public class LessonController {
             return new ResponseEntity<>(lessons, HttpStatus.OK);
         }
     }
+
+    @GetMapping(value = "/presences/{id}")
+    public ResponseEntity getPresences(@PathVariable Long id) {
+        List<PresenceListDTO> dtos = lessonService.getPresencesList(id);
+        if (dtos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(dtos, HttpStatus.OK);
+        }
+    }
+
 
 }

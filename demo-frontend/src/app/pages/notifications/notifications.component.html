@@ -1,0 +1,38 @@
+<h3 class="subjects-title">My Notifications</h3>
+
+<div class="table-container">
+  <ngx-datatable
+    #notificationsTable
+    class="material striped"
+    [rows]="notificationsList"
+    [headerHeight]="45"
+    [rowHeight]="'auto'"
+    [columnMode]="'flex'"
+    [footerHeight]="30"
+    [limit]="10"
+  >
+    <ngx-datatable-column name="Content" [flexGrow]="1">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row.content}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Date" [flexGrow]="0.2">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row.notificationTimestamp | date : 'dd/MM/yyyy'}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Is Read ?" [flexGrow]="0.1">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <mat-icon (click)="changeStatus(row.notificationId)" *ngIf="row.isRead"  class="info-icon" color="warn">
+          radio_button_checked
+        </mat-icon>
+        <mat-icon (click)="changeStatus(row.notificationId)" *ngIf="!row.isRead" class="info-icon" color="accent">
+          radio_button_unchecked
+        </mat-icon>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+
+</div>

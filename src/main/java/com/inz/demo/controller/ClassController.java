@@ -1,10 +1,11 @@
 package com.inz.demo.controller;
 
 import com.inz.demo.domain.Class;
+import com.inz.demo.domain.Subject;
+import com.inz.demo.domain.User;
 import com.inz.demo.service.IClassService;
 import com.inz.demo.service.impl.ClassServiceImpl;
-import com.inz.demo.util.DTOs.ClassDTO;
-import com.inz.demo.util.DTOs.SubjectDTO;
+import com.inz.demo.util.DTOs.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,14 +24,10 @@ public class ClassController {
         this.classService = classService;
     }
 
-    @PostMapping(value = "/class/add")
-    public ResponseEntity createClass(@RequestBody ClassDTO form) {
-        if (classService.findClassBySign(form.getClassSign()).isPresent()) {
-            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-        } else {
-            classService.createClass(form);
+    @PostMapping(value = "/classes/add")
+    public ResponseEntity createClass() {
+            classService.createClass();
             return new ResponseEntity<>(HttpStatus.CREATED);
-        }
     }
 
     @PostMapping(value = "/subject/add/{id}")
@@ -45,7 +42,7 @@ public class ClassController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @DeleteMapping(value = "/class/{id}")
+    @DeleteMapping(value = "/classes/{id}")
     public ResponseEntity deleteClass(@PathVariable("id") Long id) {
         if (classService.findClassById(id).isPresent()) {
             classService.deleteClass(id);
@@ -66,11 +63,11 @@ public class ClassController {
 
     @GetMapping(value = "/classes")
     public ResponseEntity getClasses() {
-        List<Class> classes = classService.getClasses();
-        if (classes.isEmpty()) {
+        List<ClassListDTO> dtos = classService.getClasses();
+        if (dtos.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            return new ResponseEntity<>(classes, HttpStatus.OK);
+            return new ResponseEntity<>(dtos, HttpStatus.OK);
         }
     }
 
@@ -84,13 +81,98 @@ public class ClassController {
         }
     }
 
-    @PutMapping(value = "/class/{classId}")
-    public ResponseEntity updatePreceptor(@PathVariable Long classId, @Valid @RequestBody String preceptorId, BindingResult bindingResult) {
+    @PutMapping(value = "/classes/{id}")
+    public ResponseEntity updatePreceptor(@PathVariable Long id, @Valid @RequestBody ClassDTO model, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         } else {
-            classService.changePreceptor(Long.valueOf(preceptorId), classId);
+            classService.changeClass(id, model);
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
+
+
+    @GetMapping(value = "/subjects/{id}")
+    public ResponseEntity getClasses(@PathVariable Long id) {
+        List<SubjectListDTO> dtos = classService.getSubjectList(id);
+        if (dtos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(dtos, HttpStatus.OK);
+        }
+    }
+
+    @GetMapping(value = "/lessons/{id}")
+    public ResponseEntity getLessons(@PathVariable Long id) {
+        List<LessonListDTO> dtos = classService.getLessonsList(id);
+        if (dtos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(dtos, HttpStatus.OK);
+        }
+    }
+
+    @GetMapping(value = "/students/{id}")
+    public ResponseEntity getStudentsBySubjectId(@PathVariable Long id) {
+        List<StudentWithGradeDTO> dtos = classService.getStudentListBySubjectId(id);
+        if (dtos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(dtos, HttpStatus.OK);
+        }
+    }
+
+    @GetMapping(value = "/students/data/{id}")
+    public ResponseEntity getStudentsData(@PathVariable Long id) {
+        List<StudentViewDTO> dtos = classService.getStudentByStudentId(id);
+        if (dtos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(dtos, HttpStatus.OK);
+        }
+    }
+
+
+    @GetMapping(value = "/students/absences/{id}")
+    public ResponseEntity getStudentAbsencesData(@PathVariable Long id) {
+        List<StudentAbsencesDTO> dtos = classService.getStudentAbsences(id);
+        if (dtos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(dtos, HttpStatus.OK);
+        }
+    }
+
+    @GetMapping(value = "/students/parent/absences/{id}")
+    public ResponseEntity getStudentAbsencesForParent(@PathVariable Long id) {
+        List<List<StudentAbsencesDTO>> dtos = classService.getStudentAbsencesForParent(id);
+        if (dtos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(dtos, HttpStatus.OK);
+        }
+    }
+
+    @GetMapping(value = "/students/parent/data/{id}")
+    public ResponseEntity getStudentDataForParent(@PathVariable Long id) {
+        List<List<StudentViewDTO>> dtos = classService.getStudentsForParent(id);
+        if (dtos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(dtos, HttpStatus.OK);
+        }
+    }
+
+    @GetMapping(value = "/students/teachers")
+    public ResponseEntity getTeachers() {
+        List<User> teachers = classService.getTeachers();
+        if (teachers.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(teachers, HttpStatus.OK);
+        }
+    }
+
+
+
 }

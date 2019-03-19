@@ -1,0 +1,43 @@
+footer {
+  padding: 2.6rem 0;
+  background-color: #673AB7;
+  color: white;
+}
+
+.logo-container {
+  margin-left: 20px;
+  display: inline-block;
+  color: white;
+}
+
+.content-container {
+  margin-top: 10vh;
+  min-height: 45.6vw;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.brand-name {
+  cursor: pointer;
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+}
+
+.center-hrefs {
+  margin-left: 7rem;
+}
+
+.header-items {
+  cursor: pointer;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  margin-bottom: 5vh;
+}

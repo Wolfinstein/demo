@@ -1,5 +1,6 @@
 package com.inz.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,9 +30,11 @@ public class Class {
     @Column(name = "class_sign", length = 2)
     private String classSign;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "userClass", fetch = FetchType.LAZY)
     private List<User> users = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "subjectClass", fetch = FetchType.LAZY)
     private List<Subject> subjects = new ArrayList<>();
 

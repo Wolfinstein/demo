@@ -1,0 +1,29 @@
+<div class="card-container">
+
+  <div class="login-form" mat-dialog-content>
+
+    <p class="login-field-1">
+      <i class="material-icons">face</i>
+      <mat-form-field color="background" appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="" [(ngModel)]="data.username" required>
+      </mat-form-field>
+    </p>
+
+    <p class="login-field-2">
+      <i class="material-icons">lock</i>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput placeholder="" [(ngModel)]="data.password" required>
+      </mat-form-field>
+    </p>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-stroked-button class="login-button"
+            (keyup.enter)="onLoginInClick(data)"
+            (click)="onLoginInClick(data)">Login
+    </button>
+    <p class="errMsg" *ngIf="errMsg">{{errMsg}}</p>
+  </div>
+</div>

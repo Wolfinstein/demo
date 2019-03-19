@@ -25,13 +25,52 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 import {MultiselectDropdownModule} from "angular-2-dropdown-multiselect";
 import {CountdownModule} from "ngx-countdown";
+import {LoginComponent} from "../pages/login/login.component";
+import {LogoutComponent} from "../pages/logout/logout.component";
+import {HomeComponent} from "../pages/home/home.component";
+import {DashboardComponent} from "../pages/dashboard/dashboard.component";
+import {UserAccountComponent} from "../pages/user/user.component";
+import {UpdateTeacherComponent} from "../pages/user/update-teacher/update.teacher.component";
+import {TeacherComponent} from "../pages/teacher/teacher.component";
+import {ClassService} from "../services/class.service";
+import {LessonComponent} from "../pages/teacher/teacher-lesson/lesson.component";
+import {GradePopupComponent} from "../pages/teacher/teacher-lesson/grade-popup/grade.popup.component";
+import {NewGradePopupComponent} from "../pages/teacher/teacher-lesson/new-grade-popup/new.grade.popup.component";
+import {ChangeTopicPopupComponent} from "../pages/teacher/teacher-lesson/change-topic/change.topic.popup.component";
+import {PresencesComponent} from "../pages/teacher/teacher-lesson/presences/presences.component";
+import {ChangePresenceComponent} from "../pages/teacher/teacher-lesson/presences/change-presence/change.presence.component";
+import {SendNotificationPopupComponent} from "../pages/teacher/teacher-lesson/send-notification/send.notification.popup.component";
+import {NotificationsComponent} from "../pages/notifications/notifications.component";
+import {ParentComponent} from "../pages/parent/parent.component";
+import {StudentComponent} from "../pages/student/student.component";
+import {AdminComponent} from "../pages/admin/admin.component";
+import {EditClassComponent} from "../pages/admin/edit-class/edit.class.component";
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    LogoutComponent,
+    HomeComponent,
+    DashboardComponent,
+    UserAccountComponent,
+    UpdateTeacherComponent,
+    TeacherComponent,
+    LessonComponent,
+    GradePopupComponent,
+    NewGradePopupComponent,
+    ChangeTopicPopupComponent,
+    PresencesComponent,
+    ChangePresenceComponent,
+    SendNotificationPopupComponent,
+    NotificationsComponent,
+    ParentComponent,
+    StudentComponent,
+    AdminComponent,
+    EditClassComponent
   ],
-  entryComponents: [],
+  entryComponents: [GradePopupComponent, LoginComponent, UpdateTeacherComponent, NewGradePopupComponent, ChangeTopicPopupComponent, ChangePresenceComponent, SendNotificationPopupComponent, EditClassComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -62,6 +101,7 @@ import {CountdownModule} from "ngx-countdown";
     LoginService,
     AppConfig,
     UserService,
+    ClassService
   ],
   bootstrap: [
     AppComponent

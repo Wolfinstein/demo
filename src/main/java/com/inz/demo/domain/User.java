@@ -24,9 +24,11 @@ public class User {
     @Column(name = "user_id")
     private Long userId;
 
+    @JsonIgnore
     @Column(name = "user_login", nullable = false, length = 100)
     private String userLogin;
 
+    @JsonIgnore
     @Column(name = "user_password", nullable = false, length = 100)
     private String userPassword;
 
@@ -60,10 +62,7 @@ public class User {
     @Column(name = "user_mod_date", nullable = false, length = 100)
     private Date userModificationDate;
 
-    @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_parent_id")
-    private User userParent;
-
+    @JsonIgnore
     @ManyToOne(targetEntity = Class.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_class")
     private Class userClass;
@@ -84,6 +83,10 @@ public class User {
             return "ADMIN";
         }
         if (isUserTeacher && !isUserStudent && isUserParent) {
+            return "TEACHER";
+        }
+        else if(isUserTeacher && !isUserStudent)
+        {
             return "TEACHER";
         }
         if (!isUserTeacher && isUserStudent && !isUserParent) {

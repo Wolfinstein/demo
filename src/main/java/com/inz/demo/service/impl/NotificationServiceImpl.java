@@ -8,9 +8,8 @@ import com.inz.demo.repository.UserRepository;
 import com.inz.demo.service.INotificationService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class NotificationServiceImpl implements INotificationService {
@@ -37,7 +36,7 @@ public class NotificationServiceImpl implements INotificationService {
                 .user(student)
                 .build();
         notifications.add(notification);
-        List<UserKid> parents = userKidRepository.findByKidId(student.getUserId());
+        List<UserKid> parents = userKidRepository.findByKid_UserId(student.getUserId());
 
         for (UserKid parent : parents) {
             Notification parentNotification = Notification.builder()
@@ -62,7 +61,7 @@ public class NotificationServiceImpl implements INotificationService {
                 .user(student)
                 .build();
         notifications.add(notification);
-        List<UserKid> parents = userKidRepository.findByKidId(userId);
+        List<UserKid> parents = userKidRepository.findByKid_UserId(userId);
 
         for (UserKid parent : parents) {
             Notification parentNotification = Notification.builder()
@@ -78,7 +77,7 @@ public class NotificationServiceImpl implements INotificationService {
 
     @Override
     public void absenceNotification(User student, Long lessonId) {
-        List<UserKid> parents = userKidRepository.findByKidId(student.getUserId());
+        List<UserKid> parents = userKidRepository.findByKid_UserId(student.getUserId());
         Lesson lesson = lessonRepository.getOne(lessonId);
         for (UserKid parent : parents) {
             Notification parentNotification = Notification.builder()
@@ -89,5 +88,17 @@ public class NotificationServiceImpl implements INotificationService {
                     .build();
             notificationRepository.save(parentNotification);
         }
+    }
+
+    @Override
+    public List<Notification> getNotifications(Long id) {
+        return notificationRepository.findByUser_UserId(id).stream().sorted((Comparator.comparing(Notification::getNotificationTimestamp))).collect(Collectors.toList());
+    }
+
+    @Override
+    public void changeStatus(Long id) {
+        Notification notification = notificationRepository.getOne(id);
+        notification.setIsRead(!notification.getIsRead());
+        notificationRepository.save(notification);
     }
 }

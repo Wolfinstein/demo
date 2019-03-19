@@ -1,7 +1,61 @@
 @import '~@angular/material/theming';
-@import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import '~@swimlane/ngx-datatable/release/index.css';
 @import '~@swimlane/ngx-datatable/release/themes/material.css';
 @import '~@swimlane/ngx-datatable/release/assets/icons.css';
 
 @include mat-core();
+
+.login-component .mat-dialog-container {
+  border-radius: 5px;
+  padding: 0 !important;
+  box-shadow: 0 0 5px rgb(0, 5, 0);
+}
+
+.topic-edit-component .mat-dialog-container {
+  border-radius: 5px;
+  padding: 0 !important;
+  width: 30vh;
+  height: 20vh;
+  box-shadow: 0 0 5px rgb(0, 5, 0);
+}
+
+.grade-edit-component .mat-dialog-container {
+  border-radius: 5px;
+  padding: 0 !important;
+  width: 30vh;
+  height: 25vh;
+  box-shadow: 0 0 5px rgb(0, 5, 0);
+}
+
+.new-grade-component .mat-dialog-container {
+  border-radius: 5px;
+  padding: 0 !important;
+  width: 30vh;
+  height: 25vh;
+  box-shadow: 0 0 5px rgb(0, 5, 0);
+}
+
+.presence-edit-component .mat-dialog-container {
+  border-radius: 5px;
+  padding: 0 !important;
+  width: 30vh;
+  height: 20vh;
+  box-shadow: 0 0 5px rgb(0, 5, 0);
+}
+
+.send-notification-component .mat-dialog-container {
+  border-radius: 5px;
+  padding: 0 !important;
+  width: 30vh;
+  height: 20vh;
+  box-shadow: 0 0 5px rgb(0, 5, 0);
+}
+
+.class-edit-component .mat-dialog-container {
+  border-radius: 5px;
+  padding: 0 !important;
+  width: 50vh;
+  height: 40vh;
+  box-shadow: 0 0 5px rgb(0, 5, 0);
+}

@@ -2,16 +2,105 @@ import {RouterModule, Routes} from "@angular/router";
 import {PageNotFoundComponent} from "../pages/404/page-not-found.component";
 import {PageAccessDeniedComponent} from "../pages/401/page-access-denied.component";
 import {NgModule} from "@angular/core";
+import {AuthGuard} from "../services/auth_guard.service";
+import {LogoutComponent} from "../pages/logout/logout.component";
+import {DashboardComponent} from "../pages/dashboard/dashboard.component";
+import {HomeComponent} from "../pages/home/home.component";
+import {UserAccountComponent} from "../pages/user/user.component";
+import {TeacherComponent} from "../pages/teacher/teacher.component";
+import {LessonComponent} from "../pages/teacher/teacher-lesson/lesson.component";
+import {PresencesComponent} from "../pages/teacher/teacher-lesson/presences/presences.component";
+import {NotificationsComponent} from "../pages/notifications/notifications.component";
+import {ParentComponent} from "../pages/parent/parent.component";
+import {StudentComponent} from "../pages/student/student.component";
+import {AdminComponent} from "../pages/admin/admin.component";
 
 export const routes: Routes = [
-  {path: '', redirectTo: '/', pathMatch: 'full'},
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
 
-  // {
-  //   path: 'logout',
-  //   canActivate: [AuthGuard],
-  //   component: LogoutComponent,
-  //   data: [{selectedHeaderItemIndex: -1, selectedSubNavItemIndex: -1}]
-  // },
+  {
+    path: 'home',
+    component: HomeComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full',
+        data: [{selectedHeaderItemIndex: 1, selectedSubNavItemIndex: -1}]
+      },
+    ]
+  },
+
+  {
+    path: 'account/:name',
+    canActivate: [AuthGuard],
+    component: UserAccountComponent,
+    data: [{selectedHeaderItemIndex: -1, selectedSubNavItemIndex: -1}]
+  },
+
+  {
+    path: 'dashboard',
+    canActivate: [AuthGuard],
+    component: DashboardComponent,
+    data: [{selectedHeaderItemIndex: -1, selectedSubNavItemIndex: -1}]
+  },
+
+  {
+    path: 'notifications/:id',
+    canActivate: [AuthGuard],
+    component: NotificationsComponent,
+    data: [{selectedHeaderItemIndex: -1, selectedSubNavItemIndex: -1}]
+  },
+
+
+  {
+    path: 'teacher',
+    canActivate: [AuthGuard],
+    component: TeacherComponent,
+    data: [{selectedHeaderItemIndex: -1, selectedSubNavItemIndex: -1}]
+  },
+
+  {
+    path: 'admin',
+    canActivate: [AuthGuard],
+    component: AdminComponent,
+    data: [{selectedHeaderItemIndex: -1, selectedSubNavItemIndex: -1}]
+  },
+
+  {
+    path: 'lesson/:id',
+    canActivate: [AuthGuard],
+    component: LessonComponent,
+    data: [{selectedHeaderItemIndex: -1, selectedSubNavItemIndex: -1}]
+  },
+
+  {
+    path: 'parent/:id',
+    canActivate: [AuthGuard],
+    component: ParentComponent,
+    data: [{selectedHeaderItemIndex: -1, selectedSubNavItemIndex: -1}]
+  },
+
+  {
+    path: 'student/:id',
+    canActivate: [AuthGuard],
+    component: StudentComponent,
+    data: [{selectedHeaderItemIndex: -1, selectedSubNavItemIndex: -1}]
+  },
+
+  {
+    path: 'presences/:id',
+    canActivate: [AuthGuard],
+    component: PresencesComponent,
+    data: [{selectedHeaderItemIndex: -1, selectedSubNavItemIndex: -1}]
+  },
+
+  {
+    path: 'logout',
+    canActivate: [AuthGuard],
+    component: LogoutComponent,
+    data: [{selectedHeaderItemIndex: -1, selectedSubNavItemIndex: -1}]
+  },
 
   {
     path: '**',

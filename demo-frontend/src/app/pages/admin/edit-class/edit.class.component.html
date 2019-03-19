@@ -1,0 +1,26 @@
+<div class="dialog-panel" mat-dialog-content>
+  <p class="text-dialog">
+    <mat-form-field color="background" appearance="outline">
+      <mat-label>Class sign:</mat-label>
+      <input matInput [(ngModel)]="data?.model.sign" required>
+    </mat-form-field>
+  </p>
+  <p class="text-dialog">
+    <mat-form-field color="background" appearance="outline">
+      <mat-label>Class year:</mat-label>
+      <input matInput [(ngModel)]="data?.model.year" required>
+    </mat-form-field>
+  </p>
+  <p class="text-dialog">
+    <mat-form-field>
+      <mat-label>Select an option</mat-label>
+      <mat-select [(ngModel)]="data?.model.preceptorId">
+        <mat-option  *ngFor="let teacher of teachers"
+                    value="{{teacher.userId}}">{{teacher.userName + " " + teacher.userSurname}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+  <div mat-dialog-actions>
+    <button class="button-edit" mat-stroked-button color="accent" (click)="onEdit()">Edit</button>
+  </div>
+</div>

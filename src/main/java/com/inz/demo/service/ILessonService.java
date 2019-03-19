@@ -2,6 +2,7 @@ package com.inz.demo.service;
 
 import com.inz.demo.domain.Lesson;
 import com.inz.demo.util.DTOs.LessonDTO;
+import com.inz.demo.util.DTOs.PresenceListDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Optional;
 
 @Service
 public interface ILessonService {
-    void createLesson(LessonDTO lessonDTO);
+    void createLesson(Long id);
 
     void checkPresence(Map<Long, String> presences, Long lessonId);
 
@@ -23,4 +24,6 @@ public interface ILessonService {
     Optional<Lesson> getLesson(Long id);
 
     void updateTopic(String topic, Long lessonId);
+
+    List<PresenceListDTO> getPresencesList(Long id);
 }

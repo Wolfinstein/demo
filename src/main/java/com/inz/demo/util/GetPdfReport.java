@@ -211,22 +211,22 @@ public class GetPdfReport {
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             presenceTable.addCell(cell);
 
-            cell = new PdfPCell(new Phrase(String.valueOf(presenceRepository.findByStudent_UserIdAndAndType(studentId, "PRESENT").size())));
+            cell = new PdfPCell(new Phrase(String.valueOf(presenceRepository.findByStudent_UserIdAndType(studentId, "PRESENT").size())));
             cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             presenceTable.addCell(cell);
 
-            cell = new PdfPCell(new Phrase(String.valueOf(presenceRepository.findByStudent_UserIdAndAndType(studentId, "ABSENT").size())));
+            cell = new PdfPCell(new Phrase(String.valueOf(presenceRepository.findByStudent_UserIdAndType(studentId, "ABSENT").size())));
             cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             presenceTable.addCell(cell);
 
-            cell = new PdfPCell(new Phrase(String.valueOf(presenceRepository.findByStudent_UserIdAndAndType(studentId, "JUSTIFIED").size())));
+            cell = new PdfPCell(new Phrase(String.valueOf(presenceRepository.findByStudent_UserIdAndType(studentId, "JUSTIFIED").size())));
             cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             presenceTable.addCell(cell);
 
-            cell = new PdfPCell(new Phrase(String.valueOf(presenceRepository.findByStudent_UserIdAndAndType(studentId, "LATE").size())));
+            cell = new PdfPCell(new Phrase(String.valueOf(presenceRepository.findByStudent_UserIdAndType(studentId, "LATE").size())));
             cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             presenceTable.addCell(cell);

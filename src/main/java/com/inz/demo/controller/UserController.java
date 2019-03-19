@@ -4,6 +4,7 @@ import com.inz.demo.domain.User;
 import com.inz.demo.service.IUserService;
 import com.inz.demo.service.impl.UserServiceImpl;
 import com.inz.demo.util.DTOs.UserDTO;
+import com.inz.demo.util.DTOs.UserTeacherUpdateDTO;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -54,12 +55,23 @@ public class UserController {
         }
     }
 
+    @PutMapping(value = "/teacher/{id}")
+    public ResponseEntity updateTeacher(@PathVariable Long id, @Valid @RequestBody UserTeacherUpdateDTO user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        } else {
+            userService.updateTeacher(id, user);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
+
+
     @GetMapping(value = "/user/show/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getUser(@PathVariable("id") Long id) {
         if (!userService.findUserById(id).isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            return new ResponseEntity<>(userService.findUserById(id), HttpStatus.OK);
+            return new ResponseEntity<>(userService.convertUserToDTO(id), HttpStatus.OK);
         }
     }
 

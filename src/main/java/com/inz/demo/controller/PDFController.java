@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 @RestController
 public class PDFController {
@@ -23,7 +24,7 @@ public class PDFController {
 
     @RequestMapping(value = "/studentReport/{id}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<InputStreamResource> pdfReport(@PathVariable Long id) {
+    public ResponseEntity<InputStreamResource> pdfReport(@PathVariable Long id) throws IOException {
 
         ByteArrayInputStream bis = getPdfReport.studentReport(id);
 

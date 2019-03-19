@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface UserKidRepository extends JpaRepository<UserKid, Long> {
 
-    @Query("SELECT u FROM UserKid u WHERE u.kid = :id")
-    List<UserKid> findByKidId(@Param("id") Long id);
+    List<UserKid> findByKid_UserId( Long id);
+    List<UserKid> findByUser_UserId(Long id);
 
 }

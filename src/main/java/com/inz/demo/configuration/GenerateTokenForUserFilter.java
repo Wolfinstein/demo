@@ -73,6 +73,9 @@ public class GenerateTokenForUserFilter extends AbstractAuthenticationProcessing
                 .token(tokenString)
                 .role(tokenUser.getRole())
                 .userId(String.valueOf(tokenUser.getUser().getUserId()))
+                .isUserParent(tokenUser.getUser().getIsUserParent())
+                .isUserStudent(tokenUser.getUser().getIsUserStudent())
+                .isUserTeacher(tokenUser.getUser().getIsUserTeacher())
                 .build();
 
         resp.setOperationStatus(OperationResponse.ResponseStatusEnum.SUCCESS);

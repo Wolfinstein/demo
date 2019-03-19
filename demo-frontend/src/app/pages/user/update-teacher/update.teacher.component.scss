@@ -1,0 +1,37 @@
+.card-container {
+  position: relative;
+  z-index: 1;
+  width: 26rem;
+  height: 20rem;
+  margin-left: 1rem;
+  margin-top: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+}
+
+
+.login-form {
+  margin-left: 2rem;
+}
+
+.login-field-2 {
+  margin-top: -1.5rem;
+}
+
+.login-field-1 .login-field-2 {
+  margin-left: 1rem;
+}
+
+mat-form-field {
+  width: 13rem;
+  margin-left: 2.2rem;
+  font-size: 0.7rem !important;
+}
+
+button {
+  width: 6rem !important;
+  margin-left: 9rem;
+  font-size: 1.1rem;
+  margin-top: -1rem;
+}
+

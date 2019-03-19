@@ -22,7 +22,6 @@ public class UserDTO {
     private Boolean isUserStudent;
     private Boolean isUserParent;
     private Date birthDate;
-    private Long parentId;
     private Long classId;
     private String kidsIds;
     private String phone;

@@ -1,0 +1,63 @@
+<!--Big One-->
+<mat-card class="outer-card">
+  <mat-card-title class="outer-card-title">User Panel</mat-card-title>
+  <mat-card-content class="outer-card-content">
+
+    <div class="account-column">
+
+      <mat-accordion class="inner-card">
+        <mat-expansion-panel [expanded]="true" class="inner-card-content">
+          <mat-expansion-panel-header>
+            <mat-panel-title class="inner-card-title">Info
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="account-row">
+            <p class="info-icon"> Full Name: </p>
+            <p class="account-paragraphs">{{user?.name + ' ' + user?.surname}}</p>
+          </div>
+          <div class="account-row">
+            <p class="info-icon"> Email: </p>
+            <p class="account-paragraphs">{{user?.email}}</p>
+          </div>
+          <div class="account-row">
+            <p class="info-icon"> Role: </p>
+            <p class="account-paragraphs">{{user?.role}}</p>
+          </div>
+          <div class="account-row">
+            <p class="info-icon"> Phone: </p>
+            <p class="account-paragraphs">{{user?.phone}}</p>
+          </div>
+          <div class="account-row">
+            <p class="info-icon"> Birth date: </p>
+            <p class="account-paragraphs">{{user?.birthDate | date:'dd/MM/yyyy'}}</p>
+          </div>
+          <div class="account-row">
+            <p class="info-icon"> Last modification: </p>
+            <p class="account-paragraphs">{{user?.modificationDate | date:'dd/MM/yyyy'}}</p>
+          </div>
+          <div *ngIf=" !(user?.isUserStudent && user?.isUserParent && user?.isUserTeacher)">
+            <div class="account-row" *ngIf="user?.isUserStudent">
+              <p class="info-icon"> Class: </p>
+              <p class="account-paragraphs">{{user?.classSign}}</p>
+            </div>
+            <div class="account-row" *ngIf="user?.isUserParent">
+              <p class="info-icon"> Kids: </p>
+              <p class="account-paragraphs"
+                 *ngFor="let item of user?.relatives;"> {{item.userName + ' ' + item.userSurname}}</p>
+            </div>
+            <div class="account-row" *ngIf="user?.isUserStudent">
+              <p class="info-icon"> Parents: </p>
+              <p class="account-paragraphs"
+                 *ngFor="let item of user?.relatives;"> {{item.userName + ' ' + item.userSurname}}</p>
+              <p class="account-paragraphs"></p>
+            </div>
+          </div>
+          <button *ngIf="user?.isUserTeacher" (click)="updateTeacherPopup()" mat-raised-button color="accent">Update
+            Informations
+          </button>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </mat-card-content>
+</mat-card>
+

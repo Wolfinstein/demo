@@ -2,12 +2,11 @@ package com.inz.demo.controller;
 
 import com.inz.demo.service.INotificationService;
 import com.inz.demo.service.impl.NotificationServiceImpl;
+import com.inz.demo.util.methods.QuotationStringCutter;
+import com.sun.org.apache.xpath.internal.operations.Quo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class NotificationController {
@@ -18,11 +17,23 @@ public class NotificationController {
         this.notificationService = notificationService;
     }
 
-    @PostMapping(value = "/notification/add/{studentId}")
-    public ResponseEntity messageNotification(@PathVariable Long studentId, @RequestBody String message) {
-            notificationService.writtenNotification(studentId, message);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+    @PostMapping(value = "/notification/add/{id}")
+    public ResponseEntity messageNotification(@PathVariable Long id, @RequestBody String message) {
+        notificationService.writtenNotification(id, QuotationStringCutter.cutString(message));
+        return new ResponseEntity<>(HttpStatus.CREATED);
 
+    }
+
+    @GetMapping(value = "/notifications/{id}")
+    public ResponseEntity getNotifications(@PathVariable Long id) {
+        return new ResponseEntity<>(notificationService.getNotifications(id), HttpStatus.OK);
+
+    }
+
+    @GetMapping(value = "/notifications/changeStatus/{id}")
+    public ResponseEntity changeStatus(@PathVariable Long id) {
+        notificationService.changeStatus(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

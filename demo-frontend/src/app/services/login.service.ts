@@ -32,6 +32,7 @@ export class LoginService {
 
     this.apiRequest.post('session', bodyData)
       .subscribe(response => {
+        console.log(response);
           if (response !== undefined && response !== null && response.operationStatus === "SUCCESS") {
             loginInfoReturn = {
               "success": true,
@@ -42,7 +43,10 @@ export class LoginService {
                 "email": response.item.email,
                 "displayName": response.item.firstName + " " + response.item.lastName,
                 "token": response.item.token,
-                "role": response.item.role
+                "role": response.item.role,
+                "isUserTeacher": response.item.userTeacher,
+                "isUserStudent": response.item.userStudent,
+                "isUserParent": response.item.userParent
               }
             };
             this.userInfoService.storeUserInfo(JSON.stringify(loginInfoReturn.user));

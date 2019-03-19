@@ -22,7 +22,7 @@ public class GradeController {
     }
 
 
-    @PostMapping(value = "/grade/add")
+    @PostMapping(value = "/grade")
     public ResponseEntity createGrade(@RequestBody GradeDTO form) {
         gradeService.addGrade(form);
         return new ResponseEntity<>(HttpStatus.CREATED);
