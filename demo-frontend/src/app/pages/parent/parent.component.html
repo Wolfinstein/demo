@@ -1,7 +1,6 @@
 <mat-tab-group>
   <mat-tab *ngFor="let item of studentInfoList; let i = index" label="{{item[0].fullName}}">
-
-    <button style="margin-bottom: 1vh" mat-raised-button color="warn" (click)="getStats()">Get PDF Stats</button>
+    <button style="margin-bottom: 1vh" mat-raised-button color="warn" (click)="getStats(item[0].id)">Get PDF Stats</button>
 
     <div class="table-container lesson">
       <ngx-datatable

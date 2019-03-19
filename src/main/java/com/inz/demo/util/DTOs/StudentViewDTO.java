@@ -10,6 +10,7 @@ import java.util.List;
 @Builder
 public class StudentViewDTO {
 
+    private Long id;
     private String fullName;
     private String subjectName;
     private String subjectTeacher;

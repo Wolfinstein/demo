@@ -6,13 +6,15 @@
       <button mat-button color="accent" *ngIf="isTeacher()" [routerLink]="'/teacher'">
         Teacher Panel
       </button>
-      <button mat-button color="accent" *ngIf="!isAdmin() && user?.isUserParent" [routerLink]="'/parent/' + user.userId">
+      <button mat-button color="accent" *ngIf="!isAdmin() && user?.isUserParent"
+              [routerLink]="'/parent/' + user.userId">
         Parent Panel
       </button>
       <button mat-button color="accent" *ngIf="isStudent()" [routerLink]="'/student/' + user.userId">
         Student Panel
       </button>
-      <button mat-button color="accent" *ngIf="!isAdmin() && user?.isUserParent || !isAdmin() && user?.isUserStudent" [routerLink]="'/notifications/' + user.userId">
+      <button mat-button color="accent" *ngIf="!isAdmin() && user?.isUserParent || !isAdmin() && user?.isUserStudent"
+              [routerLink]="'/notifications/' + user.userId">
         Notifications
       </button>
       <button mat-button color="accent" *ngIf="isAdmin()" [routerLink]="'/admin'">

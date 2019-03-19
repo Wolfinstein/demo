@@ -7,17 +7,14 @@ import com.inz.demo.util.DTOs.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
 public interface IClassService {
     void createClass();
 
-    void addStudents(String studentIds, Long classId);
-
-    void addSubject(SubjectDTO subjectDTO, Long classId);
-
-    Optional<Class> findClassBySign(String sign);
+    void addSubject(AddSubjectDTO subjectDTO, Long classId);
 
     void deleteClass(Long id);
 
@@ -30,6 +27,8 @@ public interface IClassService {
     void changeTeacher(Long teacherId, Long subjectId);
 
     List<SubjectListDTO> getSubjectList(Long id);
+
+    List<SubjectListDTO> getSubjects();
 
     List<LessonListDTO> getLessonsList(Long id);
 
@@ -44,4 +43,10 @@ public interface IClassService {
     List<List<StudentAbsencesDTO>> getStudentAbsencesForParent(Long id);
 
     List<User> getTeachers();
+
+    Map<Integer, List<Subject>> getClassSchedule(Long id);
+
+    Optional<Subject> getSubject(Long id);
+
+    void deleteSubject(Long id);
 }

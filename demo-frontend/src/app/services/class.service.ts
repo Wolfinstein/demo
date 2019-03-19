@@ -14,96 +14,112 @@ export class ClassService {
     return this.apiRequest.get('classes')
   }
 
-  getSubjects(id : number): Observable<any> {
+  getSubjects(id: number): Observable<any> {
     return this.apiRequest.get('subjects/' + id)
   }
 
-  getLessons(id : number): Observable<any> {
+  getLessons(id: number): Observable<any> {
     return this.apiRequest.get('lessons/' + id)
   }
 
-  getStudents(id : number): Observable<any> {
+  getStudents(id: number): Observable<any> {
     return this.apiRequest.get('students/' + id)
   }
 
-  editGrade(id : String, grade : String): Observable<any> {
+  editGrade(id: String, grade: String): Observable<any> {
     return this.apiRequest.put('grade/' + id, grade)
   }
 
-  deleteGrade(id : String): Observable<any> {
+  deleteGrade(id: String): Observable<any> {
     return this.apiRequest.delete('grade/' + id)
   }
 
-  addGrade(grade : GradeModel): Observable<any> {
+  addGrade(grade: GradeModel): Observable<any> {
     return this.apiRequest.post('grade/', grade);
   }
 
-  addLesson(id : number) : Observable<any>{
+  addLesson(id: number): Observable<any> {
     return this.apiRequest.post('lesson/add/' + id, null)
   }
 
-  deleteLesson(id : number) :Observable<any>{
+  deleteLesson(id: number): Observable<any> {
     return this.apiRequest.delete('lesson/' + id);
   }
 
-  editTopic(id : number, topic : String) : Observable<any>{
+  editTopic(id: number, topic: String): Observable<any> {
     return this.apiRequest.put('lesson/changeTopic/' + id, topic);
   }
 
-  getPresences(id : number) : Observable<any>{
-    return this.apiRequest.get('presences/' +id);
+  getPresences(id: number): Observable<any> {
+    return this.apiRequest.get('presences/' + id);
   }
 
-  editPresence(id : number, presenceType : String): Observable<any>{
+  editPresence(id: number, presenceType: String): Observable<any> {
     return this.apiRequest.put('presences/edit/' + id, presenceType);
   }
 
-  sendNotification(id : number, message : String) : Observable<any>{
+  sendNotification(id: number, message: String): Observable<any> {
     return this.apiRequest.post('notification/add/' + id, message)
   }
 
-  getNotifications(id :number) :Observable<any>{
+  getNotifications(id: number): Observable<any> {
     return this.apiRequest.get('notifications/' + id);
   }
 
-  changeStatus(id : number) : Observable<any> {
+  changeStatus(id: number): Observable<any> {
     return this.apiRequest.get('notifications/changeStatus/' + id);
   }
 
-  getStudentData(id : number) : Observable<any> {
+  getStudentData(id: number): Observable<any> {
     return this.apiRequest.get('students/data/' + id);
   }
 
-  getStats(id :number) : Observable<Blob> {
+  getStats(id: number): Observable<Blob> {
     return this.apiRequest.download('studentReport/' + id)
   }
 
-  getStudentAbsences(id : number) : Observable<any> {
+  getStudentAbsences(id: number): Observable<any> {
     return this.apiRequest.get('students/absences/' + id);
   }
 
-  getStudentDataForParent(id : number) : Observable<any> {
+  getStudentDataForParent(id: number): Observable<any> {
     return this.apiRequest.get('students/parent/data/' + id);
   }
 
-  getStudentAbsencesForParent(id : number) : Observable<any>{
+  getStudentAbsencesForParent(id: number): Observable<any> {
     return this.apiRequest.get('students/parent/absences/' + id)
   }
 
-  editClass(id : number, model : ClassEditModel) : Observable<any> {
+  editClass(id: number, model: ClassEditModel): Observable<any> {
     return this.apiRequest.put('classes/' + id, model)
   }
 
-  getTeachers() : Observable<any>{
+  getTeachers(): Observable<any> {
     return this.apiRequest.get('students/teachers')
   }
 
-  deleteClass(id : number) : Observable<any> {
+  deleteClass(id: number): Observable<any> {
     return this.apiRequest.delete('classes/' + id);
   }
 
-  createClass() : Observable<any> {
+  createClass(): Observable<any> {
     return this.apiRequest.post('classes/add', null);
+  }
+
+  getSchedule(id: number): Observable<any> {
+    return this.apiRequest.get('schedule/' + id);
+  }
+
+  getSubs(): Observable<any> {
+    return this.apiRequest.get('subjects/getAll');
+  }
+
+  deleteSubject(id: number): Observable<any> {
+    return this.apiRequest.delete('subjects/' + id);
+  }
+
+  addSubject(id: number, subject: any): Observable<any> {
+    return this.apiRequest.post('subjects/add/' + id, subject);
   }
 
 }

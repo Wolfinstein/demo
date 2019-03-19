@@ -1,5 +1,6 @@
 package com.inz.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,13 +27,19 @@ public class Subject {
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
     private User teacher;
 
+    @JsonIgnore
     @ManyToOne(targetEntity = Class.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "class")
     private Class subjectClass;
 
-    @Column(name = "subject_date_start")
-    private String subjectTimeStart;
+    @Column(name = "subject_day")
+    private int subjectDay;
 
+    @Column(name = "subject_hour")
+    private int subjectHour;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "lessonClass")
     private List<Lesson> lessons;
+
 }

@@ -1,7 +1,6 @@
 package com.inz.demo.service;
 
 import com.inz.demo.domain.Lesson;
-import com.inz.demo.util.DTOs.LessonDTO;
 import com.inz.demo.util.DTOs.PresenceListDTO;
 import org.springframework.stereotype.Service;
 

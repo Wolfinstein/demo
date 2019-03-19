@@ -1,4 +1,4 @@
-import {Component, HostBinding, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {OverlayContainer} from "@angular/cdk/overlay";
 import {UserInfoService} from "./services/user-info.service";
@@ -8,16 +8,16 @@ import {UserInfoService} from "./services/user-info.service";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   constructor(private router: Router,
               private overlayContainer: OverlayContainer,
               private userInfo: UserInfoService,) {
   }
 
-  user : any = this.userInfo.getUserInfo();
+  user: any = this.userInfo.getUserInfo();
   username: string = "";
 
-  isLoggedIn : boolean = false;
+  isLoggedIn: boolean = false;
 
   ngOnInit(): void {
     this.isLoggedIn = this.userInfo.isLoggedIn();
@@ -29,19 +29,19 @@ export class AppComponent implements OnInit{
   }
 
 
-  isAdmin() : boolean{
+  isAdmin(): boolean {
     return this.user.role == 'ADMIN';
   }
 
-  isStudent() : boolean {
+  isStudent(): boolean {
     return this.user.role == 'STUDENT';
   }
 
-  isTeacher() : boolean {
+  isTeacher(): boolean {
     return this.user.role == 'TEACHER';
   }
 
-  isParent() : boolean {
+  isParent(): boolean {
     return this.user.role == 'PARENT';
 
   }

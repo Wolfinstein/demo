@@ -1,0 +1,26 @@
+<div class="days">
+  <p class="days-in">Monday</p>
+  <p class="days-in">Tuesday</p>
+  <p class="days-in">Wednesday</p>
+  <p class="days-in">Thursday</p>
+  <p class="days-in">Friday</p>
+</div>
+
+<div class="schedule-content">
+  <div class="data-schedule" *ngFor="let day of map | keyvalue">
+    <div class="schedule-columns" *ngFor="let list of day.value">
+      <p class="schedule-par">{{list.name}}</p>
+    </div>
+  </div>
+</div>
+
+<div class="hours">
+  <p class="hours-in">8:00</p>
+  <p class="hours-in">9:00</p>
+  <p class="hours-in">10:00</p>
+  <p class="hours-in">11:00</p>
+  <p class="hours-in">12:00</p>
+  <p class="hours-in">13:00</p>
+  <p class="hours-in">14:00</p>
+  <p class="hours-in">15:00</p>
+</div>

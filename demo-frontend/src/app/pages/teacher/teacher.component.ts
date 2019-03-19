@@ -10,19 +10,17 @@ import {UserInfoService} from "../../services/user-info.service";
 })
 
 
-export class TeacherComponent{
+export class TeacherComponent {
 
   @ViewChild(DatatableComponent) private subjectsTable: DatatableComponent;
   subjectsList: any;
 
 
-
-
-  constructor(private classService : ClassService,
+  constructor(private classService: ClassService,
               private userInfo: UserInfoService) {
 
-    this.classService.getSubjects(Number(userInfo.getUserInfo().userId)).subscribe(resp =>{
-      this.subjectsList=  resp;
+    this.classService.getSubjects(Number(userInfo.getUserInfo().userId)).subscribe(resp => {
+      this.subjectsList = resp;
     })
   }
 

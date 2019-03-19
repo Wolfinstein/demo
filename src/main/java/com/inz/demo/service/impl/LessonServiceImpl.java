@@ -7,7 +7,6 @@ import com.inz.demo.domain.User;
 import com.inz.demo.repository.*;
 import com.inz.demo.service.ILessonService;
 import com.inz.demo.service.INotificationService;
-import com.inz.demo.util.DTOs.LessonDTO;
 import com.inz.demo.util.DTOs.PresenceListDTO;
 import org.springframework.stereotype.Service;
 

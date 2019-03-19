@@ -1,7 +1,5 @@
 package com.inz.demo.controller;
 
-import com.inz.demo.domain.Class;
-import com.inz.demo.domain.Subject;
 import com.inz.demo.domain.User;
 import com.inz.demo.service.IClassService;
 import com.inz.demo.service.impl.ClassServiceImpl;
@@ -26,19 +24,13 @@ public class ClassController {
 
     @PostMapping(value = "/classes/add")
     public ResponseEntity createClass() {
-            classService.createClass();
-            return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
-    @PostMapping(value = "/subject/add/{id}")
-    public ResponseEntity createSubject(@RequestBody SubjectDTO form, @PathVariable Long id) {
-        classService.addSubject(form, id);
+        classService.createClass();
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PostMapping(value = "/student/add/{id}")
-    public ResponseEntity addStudents(@RequestBody String studentIds, @PathVariable Long id) {
-        classService.addStudents(studentIds, id);
+    @PostMapping(value = "/subjects/add/{id}")
+    public ResponseEntity createSubject(@RequestBody AddSubjectDTO subject, @PathVariable Long id) {
+        classService.addSubject(subject, id);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -46,6 +38,16 @@ public class ClassController {
     public ResponseEntity deleteClass(@PathVariable("id") Long id) {
         if (classService.findClassById(id).isPresent()) {
             classService.deleteClass(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping(value = "/subjects/{id}")
+    public ResponseEntity deleteSubject(@PathVariable("id") Long id) {
+        if (classService.getSubject(id).isPresent()) {
+            classService.deleteSubject(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -101,6 +103,18 @@ public class ClassController {
             return new ResponseEntity<>(dtos, HttpStatus.OK);
         }
     }
+
+
+    @GetMapping(value = "/subjects/getAll")
+    public ResponseEntity getSubjects() {
+        List<SubjectListDTO> dtos = classService.getSubjects();
+        if (dtos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(dtos, HttpStatus.OK);
+        }
+    }
+
 
     @GetMapping(value = "/lessons/{id}")
     public ResponseEntity getLessons(@PathVariable Long id) {
@@ -173,6 +187,10 @@ public class ClassController {
         }
     }
 
+    @GetMapping(value = "/schedule/{id}")
+    public ResponseEntity getSchedule(@PathVariable Long id) {
+        return new ResponseEntity<>(classService.getClassSchedule(id), HttpStatus.OK);
 
+    }
 
 }

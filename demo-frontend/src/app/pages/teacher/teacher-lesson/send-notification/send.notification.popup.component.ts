@@ -1,9 +1,6 @@
 import {Component, Inject} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {ClassService} from "../../../../services/class.service";
-import {GradeModel} from "../../../../models/grade.model";
-import {UserInfoService} from "../../../../services/user-info.service";
-import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'send-notification-component',

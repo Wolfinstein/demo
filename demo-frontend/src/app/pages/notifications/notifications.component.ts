@@ -29,7 +29,7 @@ export class NotificationsComponent {
   }
 
   changeStatus(id: number) {
-    this.classService.changeStatus(id).subscribe(resp =>{
+    this.classService.changeStatus(id).subscribe(resp => {
       this.getNotifications();
     })
   }

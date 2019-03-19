@@ -1,8 +1,7 @@
-import {Component, ViewChild} from "@angular/core";
+import {Component} from "@angular/core";
 import {UserInfoService} from "../../services/user-info.service";
 import {ClassService} from "../../services/class.service";
 import {ActivatedRoute} from "@angular/router";
-import {DatatableComponent} from "@swimlane/ngx-datatable";
 
 @Component({
   selector: 'parent-component',
@@ -18,7 +17,6 @@ export class ParentComponent {
   studentAbsencesList: any[];
 
 
-
   constructor(private userInfo: UserInfoService,
               private classService: ClassService,
               private route: ActivatedRoute) {
@@ -27,13 +25,13 @@ export class ParentComponent {
       this.studentInfoList = resp;
     });
 
-    this.classService.getStudentAbsencesForParent(this.route.snapshot.params['id']).subscribe(resp =>{
+    this.classService.getStudentAbsencesForParent(this.route.snapshot.params['id']).subscribe(resp => {
       this.studentAbsencesList = resp;
     })
   }
 
-  getStats() {
-    this.classService.getStats(this.route.snapshot.params['id']).subscribe(resp => {
+  getStats(id: number) {
+    this.classService.getStats(id).subscribe(resp => {
         var downloadURL = window.URL.createObjectURL(resp);
         var link = document.createElement('a');
         link.href = downloadURL;

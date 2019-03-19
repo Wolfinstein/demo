@@ -23,7 +23,6 @@ export class EditClassComponent {
 
   onEdit(): void {
     let model = new ClassEditModel(this.data.model.preceptorId, this.data.model.year, this.data.model.sign);
-    console.log(model);
     this.classService.editClass(this.data.model.id, model).subscribe(resp => {
         this.dialogRef.close();
       }

@@ -13,7 +13,7 @@ import {LoginComponent} from "../login/login.component";
   styleUrls: ['./home.component.scss'],
 })
 
-export class HomeComponent  {
+export class HomeComponent {
 
   public selectedHeaderItemIndex: number = 0;
   public selectedSubNavItemIndex: number = 1;

@@ -35,14 +35,18 @@ VALUES (1, current_date, true, true, true, 'none', 'admin@gmail.com', 'admin', c
 
 update classes
 set teacher = 3
-where class_id in (1,2);
+where class_id in (1, 2);
 
 insert into user_kids(id, kid_id, user_id)
 VALUES (1, 2, 4),
        (2, 6, 4);
 
-insert into subjects(subject_id, name, subject_date_start, class, teacher)
-VALUES (1, 'Math', 'Monday/8', 1, 3);
+insert into subjects(subject_id, name, subject_day, subject_hour, class, teacher)
+VALUES (1, 'Math', 1, 9, 1, 3),
+       (2, 'Math2', 2, 10, 1, 3),
+       (3, 'Math3', 3, 11, 1, 3),
+       (4, 'Math4', 4, 12, 1, 3),
+       (5, 'Math5', 5, 13, 1, 3);
 
 insert into grades(grade_id, grade_modification_date, grade_timestamp, grade_value, student_id, subject_id, teacher_id)
 VALUES (1, current_date, current_date, 4.5, 2, 1, 3),
@@ -61,3 +65,5 @@ VALUES (1, current_date, 'PRESENT', 1, 2, 3),
        (4, current_date, 'LATE', 4, 2, 3);
 
 
+insert into logs(log_id, log_operation, table_name, table_row_id, log_date, user_id)
+values (1,'qwe', 'qwe', 1, current_date, 1);

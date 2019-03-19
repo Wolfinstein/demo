@@ -1,18 +1,15 @@
 package com.inz.demo.service.impl;
 
-import com.inz.demo.domain.*;
 import com.inz.demo.domain.Class;
+import com.inz.demo.domain.*;
 import com.inz.demo.repository.*;
 import com.inz.demo.service.IClassService;
 import com.inz.demo.util.DTOs.*;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.inz.demo.util.methods.SplitIntegers.splitStringToIntArrays;
 
 @Service
 public class ClassServiceImpl implements IClassService {
@@ -46,34 +43,15 @@ public class ClassServiceImpl implements IClassService {
     }
 
     @Override
-    public void addStudents(String studentIds, Long classId) {
-        Class _class = classRepository.findByClassId(classId).get();
-        int[] arr = splitStringToIntArrays(studentIds);
-        List<User> students = new ArrayList<>();
-        for (int _int : arr) {
-            students.add(userRepository.findByUserId((long) _int));
-        }
-        _class.setUsers(students);
-        classRepository.save(_class);
-    }
-
-    @Override
-    public void addSubject(SubjectDTO subjectDTO, Long classId) {
-        Class _class = classRepository.findByClassId(classId).get();
+    public void addSubject(AddSubjectDTO subjectDTO, Long classId) {
         Subject subject = Subject.builder()
                 .name(subjectDTO.getName())
+                .subjectDay(subjectDTO.getDay())
+                .subjectHour(subjectDTO.getHour())
                 .teacher(userRepository.findByUserId(subjectDTO.getTeacherId()))
-                .subjectTimeStart(subjectDTO.getSubjectTimeStart())
+                .subjectClass(classRepository.findByClassId(classId).get())
                 .build();
-        List<Subject> subjects = _class.getSubjects();
-        subjects.add(subject);
-        _class.setSubjects(subjects);
-        classRepository.save(_class);
-    }
-
-    @Override
-    public Optional<Class> findClassBySign(String sign) {
-        return classRepository.findByClassSign(sign);
+        subjectRepository.save(subject);
     }
 
     @Override
@@ -141,11 +119,37 @@ public class ClassServiceImpl implements IClassService {
             dtos.add(SubjectListDTO.builder()
                     .id(s.getSubjectId())
                     .classSign(s.getSubjectClass().getClassSign())
-                    .classStart(s.getSubjectTimeStart())
+                    .classStart(String.valueOf(s.getSubjectDay()) + " / " + s.getSubjectHour())
+                    .classId(s.getSubjectClass().getClassId())
+                    .classDay(s.getSubjectDay())
+                    .classHour(s.getSubjectHour())
                     .classYear(s.getSubjectClass().getClassYear())
                     .name(s.getName())
+                    .teacherId(s.getTeacher().getUserId())
                     .lessonCounter(s.getLessons().size())
                     .kidsCounter(s.getSubjectClass().getUsers().size())
+                    .build());
+        }
+        return dtos;
+    }
+
+    @Override
+    public List<SubjectListDTO> getSubjects() {
+        List<Subject> subjects = subjectRepository.findAll();
+        List<SubjectListDTO> dtos = new ArrayList<>();
+        for (Subject s : subjects) {
+            dtos.add(SubjectListDTO.builder()
+                    .id(s.getSubjectId())
+                    .classSign(s.getSubjectClass().getClassSign())
+                    .classId(s.getSubjectClass().getClassId())
+                    .classDay(s.getSubjectDay())
+                    .classHour(s.getSubjectHour())
+                    .classYear(s.getSubjectClass().getClassYear())
+                    .name(s.getName())
+                    .teacherId(s.getTeacher().getUserId())
+                    .lessonCounter(s.getLessons().size())
+                    .kidsCounter(s.getSubjectClass().getUsers().size())
+                    .teacherName(s.getTeacher().getUserName() + " " + s.getTeacher().getUserSurname())
                     .build());
         }
         return dtos;
@@ -210,6 +214,7 @@ public class ClassServiceImpl implements IClassService {
 
 
             dtos.add(StudentViewDTO.builder()
+                    .id(user.getUserId())
                     .fullName(user.getUserName() + " " + user.getUserSurname())
                     .subjectName(s.getName())
                     .subjectTeacher(s.getTeacher().getUserName() + " " + s.getTeacher().getUserSurname())
@@ -265,6 +270,40 @@ public class ClassServiceImpl implements IClassService {
     @Override
     public List<User> getTeachers() {
         return userRepository.findAll().stream().filter(user -> user.getRoles().equals("TEACHER")).collect(Collectors.toList());
+    }
+
+    @Override
+    public Map<Integer, List<Subject>> getClassSchedule(Long id) {
+        Map<Integer, List<Subject>> map = new HashMap<>();
+        for (int i = 1; i < 6; i++) {
+            List<Subject> subjects = subjectRepository.findBySubjectClassClassIdAndSubjectDay(id, i);
+            List<Subject> filtered = new ArrayList<>();
+            for (int j = 8; j <= 15; j++) {
+                final int w = j;
+                if (subjects.stream().filter(subject -> subject.getSubjectHour() == w).collect(Collectors.toList()).isEmpty()) {
+                    filtered.add(Subject.builder()
+                            .name("empty")
+                            .subjectHour(j)
+                            .subjectDay(i)
+                            .teacher(null)
+                            .build());
+                } else {
+                    filtered.add(subjects.stream().filter(subject -> subject.getSubjectHour() == w).collect(Collectors.toList()).get(0));
+                }
+            }
+            map.put(i, filtered);
+        }
+        return map;
+    }
+
+    @Override
+    public Optional<Subject> getSubject(Long id) {
+        return subjectRepository.findById(id);
+    }
+
+    @Override
+    public void deleteSubject(Long id) {
+        subjectRepository.deleteById(id);
     }
 
 

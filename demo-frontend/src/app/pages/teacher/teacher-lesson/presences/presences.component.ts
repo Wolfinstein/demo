@@ -1,10 +1,8 @@
 import {Component, ViewChild} from "@angular/core";
 import {ClassService} from "../../../../services/class.service";
-import {UserInfoService} from "../../../../services/user-info.service";
 import {ActivatedRoute} from "@angular/router";
 import {MatDialog} from "@angular/material";
 import {DatatableComponent} from "@swimlane/ngx-datatable";
-import {GradePopupComponent} from "../grade-popup/grade.popup.component";
 import {ChangePresenceComponent} from "./change-presence/change.presence.component";
 
 @Component({

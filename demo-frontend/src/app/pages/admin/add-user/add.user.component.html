@@ -1,0 +1,98 @@
+<div class="dialog-panel" mat-dialog-content>
+
+  <div class="rows">
+    <p class="text-dialog">
+      <mat-form-field color="background" appearance="outline">
+        <mat-label>Name:</mat-label>
+        <input matInput [(ngModel)]="data.name" required>
+      </mat-form-field>
+    </p>
+
+    <p class="text-dialog">
+      <mat-form-field color="background" appearance="outline">
+        <mat-label>Surname:</mat-label>
+        <input matInput [(ngModel)]="data.surname" required>
+      </mat-form-field>
+    </p>
+  </div>
+
+  <div class="rows">
+    <p class="text-dialog">
+      <mat-form-field color="background" appearance="outline">
+        <mat-label>Email:</mat-label>
+        <input matInput [(ngModel)]="data.email" required>
+      </mat-form-field>
+    </p>
+
+    <p class="text-dialog">
+      <mat-form-field color="background" appearance="outline">
+        <mat-label>Phone:</mat-label>
+        <input matInput [(ngModel)]="data.phone" required>
+      </mat-form-field>
+    </p>
+  </div>
+
+  <div class="rows">
+    <p class="text-dialog">
+      <mat-form-field>
+        <mat-label>Pick your birth date</mat-label>
+        <input matInput [(ngModel)]="data.birthDate" [matDatepicker]="picker" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </p>
+
+    <p class="text-dialog">
+      <mat-form-field color="background" appearance="outline">
+        <mat-label>Login:</mat-label>
+        <input matInput [(ngModel)]="data.login" required>
+      </mat-form-field>
+    </p>
+  </div>
+  <div class="rows">
+    <p class="text-dialog">
+      <mat-form-field color="background" appearance="outline">
+        <mat-label>Password:</mat-label>
+        <input type="password" matInput [(ngModel)]="data.password" required>
+      </mat-form-field>
+    </p>
+    <p class="text-dialog">
+      <mat-radio-group [(ngModel)]="data.isUserTeacher" aria-label="Is user teacher ? ">
+        <mat-label>Teacher ?</mat-label>
+        <mat-radio-button value="{{false}}">Yes</mat-radio-button>
+        <mat-radio-button value="{{true}}">No</mat-radio-button>
+      </mat-radio-group>
+    </p>
+  </div>
+  <div class="rows">
+    <p class="text-dialog">
+      <mat-radio-group [(ngModel)]="data.isUserParent" aria-label="Is user parent ? ">
+        <mat-label style="margin-right: 1vh">Parent ?</mat-label>
+        <mat-radio-button value="{{false}}">Yes</mat-radio-button>
+        <mat-radio-button value="{{true}}">No</mat-radio-button>
+      </mat-radio-group>
+    </p>
+    <p class="text-dialog">
+      <mat-radio-group [(ngModel)]="data.isUserStudent" aria-label="Is user student ? ">
+        <mat-label style="margin-right: 1vh; margin-left: 1vh">Student ?</mat-label>
+        <mat-radio-button value="{{false}}">Yes</mat-radio-button>
+        <mat-radio-button value="{{true}}">No</mat-radio-button>
+      </mat-radio-group>
+    </p>
+  </div>
+  <div class="rows">
+    <p class="text-dialog">
+      <mat-form-field>
+        <mat-label style="margin-right: 1vh; margin-left: 1vh">Select a class</mat-label>
+        <mat-select [(ngModel)]="data.classId">
+          <mat-option *ngFor="let class_ of classes"
+                      value="{{class_.id}}">{{class_.sign}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
+
+    <div mat-dialog-actions>
+      <button class="button-add" mat-stroked-button color="accent" (click)="onAdd()">Edit</button>
+    </div>
+  </div>
+</div>

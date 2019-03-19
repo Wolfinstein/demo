@@ -1,0 +1,6 @@
+<ss-multiselect-dropdown [texts]="myTexts" [options]="myOptions" [settings]="mySettings"
+                         [(ngModel)]="optionsModel"
+                         (ngModelChange)="onChange($event)"></ss-multiselect-dropdown>
+
+
+<button class="b-s" mat-raised-button color="primary" (click)="onEdit()">Change Kids</button>

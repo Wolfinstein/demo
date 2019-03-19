@@ -45,6 +45,11 @@ import {ParentComponent} from "../pages/parent/parent.component";
 import {StudentComponent} from "../pages/student/student.component";
 import {AdminComponent} from "../pages/admin/admin.component";
 import {EditClassComponent} from "../pages/admin/edit-class/edit.class.component";
+import {EditKidsComponent} from "../pages/admin/edit-kids/edit.kids.component";
+import {EditUserComponent} from "../pages/admin/edit-user/edit.user.component";
+import {AddUserComponent} from "../pages/admin/add-user/add.user.component";
+import {ScheduleComponent} from "../pages/schedule/schedule.component";
+import {AddSubjectComponent} from "../pages/admin/add-subject/add.subject.component";
 
 
 @NgModule({
@@ -68,9 +73,14 @@ import {EditClassComponent} from "../pages/admin/edit-class/edit.class.component
     ParentComponent,
     StudentComponent,
     AdminComponent,
-    EditClassComponent
+    EditClassComponent,
+    EditKidsComponent,
+    EditUserComponent,
+    AddUserComponent,
+    ScheduleComponent,
+    AddSubjectComponent
   ],
-  entryComponents: [GradePopupComponent, LoginComponent, UpdateTeacherComponent, NewGradePopupComponent, ChangeTopicPopupComponent, ChangePresenceComponent, SendNotificationPopupComponent, EditClassComponent],
+  entryComponents: [AddSubjectComponent, GradePopupComponent, LoginComponent, UpdateTeacherComponent, NewGradePopupComponent, ChangeTopicPopupComponent, ChangePresenceComponent, SendNotificationPopupComponent, EditClassComponent, EditKidsComponent, EditUserComponent, AddUserComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

@@ -6,9 +6,9 @@ export interface UserInStorage {
   displayName: string;
   token: string;
   role: string;
-  isUserTeacher : boolean;
-  isUserStudent :boolean;
-  isUserParent : boolean;
+  isUserTeacher: boolean;
+  isUserStudent: boolean;
+  isUserParent: boolean;
 }
 
 export interface LoginInfoInStorage {

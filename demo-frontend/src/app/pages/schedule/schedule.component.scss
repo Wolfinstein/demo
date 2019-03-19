@@ -1,0 +1,39 @@
+.data-schedule {
+  display: inline-block;
+  text-align: right;
+}
+
+
+.schedule-columns {
+}
+
+.schedule-par {
+  margin-right: 10vh;
+  text-align: right;
+  font-size: 1.3rem;
+  color: #FFC107;
+}
+
+.schedule-content {
+  margin-left: 27.5%;
+}
+
+.days {
+  display: inline-flex;
+  margin-left: 22%;
+}
+
+.days-in {
+  font-size: 1.2rem;
+  margin-left: 8vh;
+}
+
+.hours {
+  z-index: 1000;
+  margin-top: -37.9vh;
+  margin-left: 35vh;
+}
+
+.hours-in {
+  margin-bottom: 2.5vh;
+}

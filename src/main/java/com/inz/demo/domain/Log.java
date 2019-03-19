@@ -21,7 +21,7 @@ public class Log {
 
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
     @JoinColumn(name = "user_id")
-    private User userId;
+    private User user;
 
     @Column(name = "table_name")
     private String tableName;

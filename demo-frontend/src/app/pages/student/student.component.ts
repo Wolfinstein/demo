@@ -28,18 +28,18 @@ export class StudentComponent {
       this.studentInfoList = resp;
     });
 
-    this.classService.getStudentAbsences(this.route.snapshot.params['id']).subscribe(resp =>{
+    this.classService.getStudentAbsences(this.route.snapshot.params['id']).subscribe(resp => {
       this.studentAbsencesList = resp;
     })
   }
 
   getStats() {
     this.classService.getStats(this.route.snapshot.params['id']).subscribe(resp => {
-      var downloadURL = window.URL.createObjectURL(resp);
-      var link = document.createElement('a');
-      link.href = downloadURL;
-      link.download = "help.pdf";
-      link.click();
+        var downloadURL = window.URL.createObjectURL(resp);
+        var link = document.createElement('a');
+        link.href = downloadURL;
+        link.download = "help.pdf";
+        link.click();
       }
     );
   }

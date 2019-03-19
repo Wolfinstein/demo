@@ -1,0 +1,43 @@
+<div class="dialog-panel" mat-dialog-content>
+
+  <p class="text-dialog">
+    <mat-form-field color="background" appearance="outline">
+      <mat-label>Name:</mat-label>
+      <input matInput [(ngModel)]="data?.data.name" required>
+    </mat-form-field>
+  </p>
+
+  <p class="text-dialog">
+    <mat-form-field color="background" appearance="outline">
+      <mat-label>Surname:</mat-label>
+      <input matInput [(ngModel)]="data?.data.surname" required>
+    </mat-form-field>
+  </p>
+
+  <p class="text-dialog">
+    <mat-form-field color="background" appearance="outline">
+      <mat-label>Email:</mat-label>
+      <input matInput [(ngModel)]="data?.data.email" required>
+    </mat-form-field>
+  </p>
+
+  <p class="text-dialog">
+    <mat-form-field color="background" appearance="outline">
+      <mat-label>Phone:</mat-label>
+      <input matInput [(ngModel)]="data?.data.phone" required>
+    </mat-form-field>
+  </p>
+
+  <p class="text-dialog">
+    <mat-form-field>
+      <mat-label>Pick your birth date</mat-label>
+      <input matInput [(ngModel)]="data?.data.birthDate" [matDatepicker]="picker" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </p>
+
+  <div mat-dialog-actions>
+    <button class="button-edit" mat-stroked-button color="accent" (click)="editUser()">Edit</button>
+  </div>
+</div>

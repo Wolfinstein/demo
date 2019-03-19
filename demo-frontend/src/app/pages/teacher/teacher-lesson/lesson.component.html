@@ -37,7 +37,7 @@
       </ng-template>
     </ngx-datatable-column>
   </ngx-datatable>
-   <button class="add-lesson" mat-raised-button color="primary" (click)="addLesson()">Add Lesson</button>
+  <button class="add-lesson" mat-raised-button color="primary" (click)="addLesson()">Add Lesson</button>
 </div>
 
 <h3 class="lesson-title">List of students</h3>
@@ -77,7 +77,7 @@
 
     <ngx-datatable-column [flexGrow]="0.25">
       <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-        <button mat-raised-button color="accent"  (click)="addGrade(row.studentId)" >Add grade
+        <button mat-raised-button color="accent" (click)="addGrade(row.studentId)">Add grade
         </button>
       </ng-template>
     </ngx-datatable-column>

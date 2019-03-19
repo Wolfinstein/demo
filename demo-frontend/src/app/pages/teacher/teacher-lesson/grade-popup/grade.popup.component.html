@@ -1,12 +1,12 @@
-  <div class="dialog-panel"  mat-dialog-content>
-    <p class="text-dialog">
-      <mat-form-field color="background" appearance="outline">
-        <mat-label>GradeValue</mat-label>
-        <input matInput placeholder="" [(ngModel)]="data.gradeValue" value="{{data.gradeValue}}" required>
-      </mat-form-field>
-    </p>
+<div class="dialog-panel" mat-dialog-content>
+  <p class="text-dialog">
+    <mat-form-field color="background" appearance="outline">
+      <mat-label>GradeValue</mat-label>
+      <input matInput placeholder="" [(ngModel)]="data.gradeValue" value="{{data.gradeValue}}" required>
+    </mat-form-field>
+  </p>
   <div mat-dialog-actions>
     <button class="button-edit" mat-stroked-button color="accent" (click)="onEdit()">Edit</button>
     <button class="button-edit2" mat-stroked-button color="warn" (click)="onDelete()">Delete</button>
   </div>
-  </div>
+</div>

@@ -10,8 +10,12 @@ import java.util.List;
 @Service
 public interface INotificationService {
     void newGradeNotification(User student, Grade grade);
+
     void writtenNotification(Long userId, String message);
+
     void absenceNotification(User student, Long lessonId);
+
     List<Notification> getNotifications(Long id);
+
     void changeStatus(Long id);
 }

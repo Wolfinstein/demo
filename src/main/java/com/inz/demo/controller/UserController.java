@@ -3,9 +3,10 @@ package com.inz.demo.controller;
 import com.inz.demo.domain.User;
 import com.inz.demo.service.IUserService;
 import com.inz.demo.service.impl.UserServiceImpl;
+import com.inz.demo.util.DTOs.KidDTO;
 import com.inz.demo.util.DTOs.UserDTO;
 import com.inz.demo.util.DTOs.UserTeacherUpdateDTO;
-import org.springframework.http.HttpHeaders;
+import com.inz.demo.util.methods.QuotationStringCutter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -77,12 +78,35 @@ public class UserController {
 
     @GetMapping(value = "/users")
     public ResponseEntity getUsers() {
-        List<User> users = userService.getUsers();
-        if (users.isEmpty()) {
+        List<UserDTO> dtos = userService.getUsers();
+        if (dtos.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            return new ResponseEntity<>(users, HttpStatus.OK);
+            return new ResponseEntity<>(dtos, HttpStatus.OK);
         }
     }
 
- }
+    @GetMapping(value = "/users/potentialKids")
+    public ResponseEntity getPotentialKids() {
+        List<KidDTO> dtos = userService.getPotentialKids();
+        if (dtos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(dtos, HttpStatus.OK);
+        }
+    }
+
+
+    @PutMapping(value = "/users/kids/{id}")
+    public ResponseEntity editKids(@PathVariable Long id, @Valid @RequestBody String kidIds) {
+        userService.editKids(id, QuotationStringCutter.cutString(kidIds));
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/users/edit/{id}")
+    public ResponseEntity editUser(@PathVariable Long id, @Valid @RequestBody UserDTO user) {
+        userService.editUser(id, user);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+}

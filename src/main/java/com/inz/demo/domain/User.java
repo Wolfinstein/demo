@@ -84,9 +84,7 @@ public class User {
         }
         if (isUserTeacher && !isUserStudent && isUserParent) {
             return "TEACHER";
-        }
-        else if(isUserTeacher && !isUserStudent)
-        {
+        } else if (isUserTeacher && !isUserStudent) {
             return "TEACHER";
         }
         if (!isUserTeacher && isUserStudent && !isUserParent) {

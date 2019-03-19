@@ -1,7 +1,6 @@
 package com.inz.demo.util.DTOs;
 
 import com.inz.demo.domain.Grade;
-import com.inz.demo.domain.Presence;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -3,7 +3,6 @@ import {Router} from "@angular/router";
 import {LoginService} from "../../services/login.service";
 import {LoginModel} from "../../models/login.model";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material";
-import {delay} from "rxjs/operators";
 
 @Component({
   selector: 'login-component',

@@ -2,7 +2,7 @@ import {Component, ViewChild} from "@angular/core";
 import {DatatableComponent} from "@swimlane/ngx-datatable";
 import {ClassService} from "../../../services/class.service";
 import {UserInfoService} from "../../../services/user-info.service";
-import {ActivatedRoute, Route} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {MatDialog} from "@angular/material";
 import {GradePopupComponent} from "./grade-popup/grade.popup.component";
 import {NewGradePopupComponent} from "./new-grade-popup/new.grade.popup.component";
@@ -75,7 +75,7 @@ export class LessonComponent {
     )
   }
 
-  deleteLesson(id : number){
+  deleteLesson(id: number) {
     this.classService.deleteLesson(id).subscribe(resp => {
       this.getLessons();
     })

@@ -3,7 +3,6 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {ClassService} from "../../../../services/class.service";
 import {GradeModel} from "../../../../models/grade.model";
 import {UserInfoService} from "../../../../services/user-info.service";
-import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'new-grade-component',
@@ -15,14 +14,13 @@ import {ActivatedRoute} from "@angular/router";
 export class NewGradePopupComponent {
 
   constructor(private classService: ClassService,
-              private userInfo : UserInfoService,
+              private userInfo: UserInfoService,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public dialogRef: MatDialogRef<NewGradePopupComponent>) {
   }
 
   onAdd(): void {
-    let grade : GradeModel = new GradeModel(this.data.studentId, this.userInfo.getUserInfo().userId, this.data.gradeValue, this.data.subjectId);
-    console.log(grade);
+    let grade: GradeModel = new GradeModel(this.data.studentId, this.userInfo.getUserInfo().userId, this.data.gradeValue, this.data.subjectId);
     this.classService.addGrade(grade).subscribe(resp => {
         this.dialogRef.close();
       }

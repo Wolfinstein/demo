@@ -1,0 +1,61 @@
+<div class="dialog-panel" mat-dialog-content>
+  <p class="text-dialog">
+    <mat-form-field color="background" appearance="outline">
+      <mat-label>Name:</mat-label>
+      <input matInput [(ngModel)]="data.name" required>
+    </mat-form-field>
+  </p>
+
+  <p class="text-dialog">
+    <mat-form-field>
+      <mat-label>Select a teacher</mat-label>
+      <mat-select [(ngModel)]="data.teacherId">
+        <mat-option *ngFor="let teacher of teachers"
+                    value="{{teacher.userId}}">{{teacher.userName + " " + teacher.userSurname}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+
+  <p class="text-dialog">
+    <mat-form-field>
+      <mat-label>Select a class</mat-label>
+      <mat-select [(ngModel)]="data.classId">
+        <mat-option *ngFor="let class_ of classes"
+                    value="{{class_.id}}">{{class_.sign}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+
+  <p class="text-dialog">
+    <mat-form-field>
+      <mat-label>Select a day</mat-label>
+      <mat-select [(ngModel)]="data.day">
+        <mat-option value="{{1}}">Monday</mat-option>
+        <mat-option value="{{2}}">Tuesday</mat-option>
+        <mat-option value="{{3}}">Wednesday</mat-option>
+        <mat-option value="{{4}}">Thursday</mat-option>
+        <mat-option value="{{5}}">Friday</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+
+  <p class="text-dialog">
+    <mat-form-field>
+      <mat-label>Select a hour</mat-label>
+      <mat-select [(ngModel)]="data.hour">
+        <mat-option value="{{8}}">8:00</mat-option>
+        <mat-option value="{{9}}">9:00</mat-option>
+        <mat-option value="{{10}}">10:00</mat-option>
+        <mat-option value="{{11}}">11:00</mat-option>
+        <mat-option value="{{12}}">12:00</mat-option>
+        <mat-option value="{{13}}">13:00</mat-option>
+        <mat-option value="{{14}}">14:00</mat-option>
+        <mat-option value="{{15}}">15:00</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+
+  <div mat-dialog-actions>
+    <button class="button-edit" mat-stroked-button color="accent" (click)="onAdd()">Add</button>
+  </div>
+</div>

@@ -1,6 +1,5 @@
 <mat-tab-group>
   <mat-tab label="Classes">
-
     <div class="table-container lesson">
       <ngx-datatable
         class="material striped"
@@ -47,18 +46,172 @@
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="" [flexGrow]="0.2">
+        <ngx-datatable-column name="" [flexGrow]="0.4">
           <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-            <button mat-stroked-button color="accent" (click)="editClassPopup(row)" >Edit</button>
-            <button mat-stroked-button color="warn" (click)="deleteClass(row.id)" >Delete</button>
+            <button mat-stroked-button color="accent" (click)="editClassPopup(row)">Edit</button>
+            <button mat-stroked-button color="warn" (click)="deleteClass(row.id)">Delete</button>
+            <button mat-stroked-button color="primary" [routerLink]="'/schedule/' + row.id">Schedule</button>
+
           </ng-template>
         </ngx-datatable-column>
 
       </ngx-datatable>
-      <button mat-raised-button color="warn" (click)="addClass()" >Add Class</button>
+      <button mat-raised-button color="warn" (click)="addClass()">Add Class</button>
     </div>
-
   </mat-tab>
-  <mat-tab label="Users"> Users</mat-tab>
-  <mat-tab label="Subjects"> Subjects</mat-tab>
+  <mat-tab label="Users">
+    <div class="table-container lesson">
+      <ngx-datatable
+        class="material striped"
+        [rows]="userList"
+        [headerHeight]="45"
+        [rowHeight]="'auto'"
+        [columnMode]="'flex'"
+        [footerHeight]="30"
+        [limit]="10"
+      >
+        <ngx-datatable-column name="Id" [flexGrow]="0.1">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.id}}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Full name" [flexGrow]="0.3">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.name + ' ' + row.surname }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Birth date" [flexGrow]="0.2">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.birthDate | date:'dd/MM/yyyy'}}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Class" [flexGrow]="0.1">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.classSign}}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Phone" [flexGrow]="0.2">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.phone}}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Role" [flexGrow]="0.2">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.role}}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="" [flexGrow]="0.4">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <button mat-stroked-button color="primary" (click)="editUserPopup(row)">Edit</button>
+            <button mat-stroked-button color="warn" (click)="deleteUser(row.id)">Delete</button>
+            <button mat-stroked-button color="accent" *ngIf="row.isUserParent && row.role != 'ADMIN'"
+                    (click)="editKidsPopup(row)">Kids
+            </button>
+          </ng-template>
+        </ngx-datatable-column>
+
+      </ngx-datatable>
+      <button mat-raised-button color="warn" (click)="addUserPopup()">Add User</button>
+    </div>
+  </mat-tab>
+  <mat-tab label="Subjects">
+
+    <div class="table-container lesson">
+      <ngx-datatable
+        class="material striped"
+        [rows]="subjectList"
+        [headerHeight]="45"
+        [rowHeight]="'auto'"
+        [columnMode]="'flex'"
+        [footerHeight]="30"
+        [limit]="5"
+      >
+        <ngx-datatable-column name="Id" [flexGrow]="0.1">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.id}}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Name" [flexGrow]="0.3">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.name }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Teacher" [flexGrow]="0.3">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.teacherName }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Class Sign" [flexGrow]="0.2">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.classSign}}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Date" [flexGrow]="0.2">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.classDay + ' / ' + row.classHour }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="" [flexGrow]="0.4">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <button mat-stroked-button color="warn" (click)="deleteSubject(row.id)">Delete</button>
+          </ng-template>
+        </ngx-datatable-column>
+
+      </ngx-datatable>
+      <button mat-raised-button color="warn" (click)="addSubjectPopup()">Add Subject</button>
+    </div>
+  </mat-tab>
+  <mat-tab label="Logs">
+    <ngx-datatable
+      class="material striped"
+      [rows]="logs"
+      [headerHeight]="45"
+      [rowHeight]="'auto'"
+      [columnMode]="'flex'"
+      [footerHeight]="30"
+      [limit]="5"
+    >
+
+      <ngx-datatable-column name="User Id" [flexGrow]="0.1">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.user.userId}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Table" [flexGrow]="0.1">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.tableName}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Row" [flexGrow]="0.1">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.tableRow}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Operation" [flexGrow]="0.1">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.operation}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Timestamp" [flexGrow]="0.1">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.timestamp | date : 'short'}}
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </mat-tab>
 </mat-tab-group>

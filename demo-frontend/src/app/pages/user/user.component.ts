@@ -30,7 +30,7 @@ export class UserAccountComponent implements OnInit {
   }
 
   updateTeacherPopup() {
-    let updateTeacherModel : TeacherUpdateModel = new TeacherUpdateModel(
+    let updateTeacherModel: TeacherUpdateModel = new TeacherUpdateModel(
       this.user.name, this.user.email, this.user.phone, this.user.surname);
 
     let dialogRef = this.dialog.open(UpdateTeacherComponent, {
@@ -41,7 +41,6 @@ export class UserAccountComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
     });
   }
-
 
 
 }

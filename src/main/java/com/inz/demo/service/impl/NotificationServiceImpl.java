@@ -8,7 +8,10 @@ import com.inz.demo.repository.UserRepository;
 import com.inz.demo.service.INotificationService;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service

@@ -14,6 +14,7 @@ import {NotificationsComponent} from "../pages/notifications/notifications.compo
 import {ParentComponent} from "../pages/parent/parent.component";
 import {StudentComponent} from "../pages/student/student.component";
 import {AdminComponent} from "../pages/admin/admin.component";
+import {ScheduleComponent} from "../pages/schedule/schedule.component";
 
 export const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -52,6 +53,12 @@ export const routes: Routes = [
     data: [{selectedHeaderItemIndex: -1, selectedSubNavItemIndex: -1}]
   },
 
+  {
+    path: 'schedule/:id',
+    canActivate: [AuthGuard],
+    component: ScheduleComponent,
+    data: [{selectedHeaderItemIndex: -1, selectedSubNavItemIndex: -1}]
+  },
 
   {
     path: 'teacher',

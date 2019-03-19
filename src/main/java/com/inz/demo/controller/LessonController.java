@@ -3,7 +3,6 @@ package com.inz.demo.controller;
 import com.inz.demo.domain.Lesson;
 import com.inz.demo.service.ILessonService;
 import com.inz.demo.service.impl.LessonServiceImpl;
-import com.inz.demo.util.DTOs.LessonDTO;
 import com.inz.demo.util.DTOs.PresenceListDTO;
 import com.inz.demo.util.methods.QuotationStringCutter;
 import org.springframework.http.HttpStatus;
@@ -12,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class LessonController {

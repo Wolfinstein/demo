@@ -32,7 +32,6 @@ export class LoginService {
 
     this.apiRequest.post('session', bodyData)
       .subscribe(response => {
-        console.log(response);
           if (response !== undefined && response !== null && response.operationStatus === "SUCCESS") {
             loginInfoReturn = {
               "success": true,
