@@ -59,8 +59,8 @@
     <p class="text-dialog">
       <mat-radio-group [(ngModel)]="data.isUserTeacher" aria-label="Is user teacher ? ">
         <mat-label>Teacher ?</mat-label>
-        <mat-radio-button value="{{false}}">Yes</mat-radio-button>
-        <mat-radio-button value="{{true}}">No</mat-radio-button>
+        <mat-radio-button value="{{true}}">Yes</mat-radio-button>
+        <mat-radio-button value="{{false}}">No</mat-radio-button>
       </mat-radio-group>
     </p>
   </div>
@@ -68,15 +68,15 @@
     <p class="text-dialog">
       <mat-radio-group [(ngModel)]="data.isUserParent" aria-label="Is user parent ? ">
         <mat-label style="margin-right: 1vh">Parent ?</mat-label>
-        <mat-radio-button value="{{false}}">Yes</mat-radio-button>
-        <mat-radio-button value="{{true}}">No</mat-radio-button>
+        <mat-radio-button value="{{true}}">Yes</mat-radio-button>
+        <mat-radio-button value="{{false}}">No</mat-radio-button>
       </mat-radio-group>
     </p>
     <p class="text-dialog">
       <mat-radio-group [(ngModel)]="data.isUserStudent" aria-label="Is user student ? ">
         <mat-label style="margin-right: 1vh; margin-left: 1vh">Student ?</mat-label>
-        <mat-radio-button value="{{false}}">Yes</mat-radio-button>
-        <mat-radio-button value="{{true}}">No</mat-radio-button>
+        <mat-radio-button value="{{true}}">Yes</mat-radio-button>
+        <mat-radio-button value="{{false}}">No</mat-radio-button>
       </mat-radio-group>
     </p>
   </div>
@@ -92,7 +92,7 @@
     </p>
 
     <div mat-dialog-actions>
-      <button class="button-add" mat-stroked-button color="accent" (click)="onAdd()">Edit</button>
+      <button class="button-add" mat-stroked-button color="accent" (click)="onAdd()">Add User</button>
     </div>
   </div>
 </div>
