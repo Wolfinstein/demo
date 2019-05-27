@@ -29,8 +29,8 @@ export class UserService {
     return this.apiRequest.put('users/kids/' + id, kidIds);
   }
 
-  getPotentialKids(): Observable<any> {
-    return this.apiRequest.get('users/potentialKids');
+  getPotentialKids(id : number): Observable<any> {
+    return this.apiRequest.get('users/potentialKids/' + id);
   }
 
   editUser(id: number, user: any): Observable<any> {

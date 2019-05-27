@@ -7,6 +7,7 @@ import com.inz.demo.util.DTOs.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +31,9 @@ public class ClassController {
 
     @PostMapping(value = "/subjects/add/{id}")
     public ResponseEntity createSubject(@RequestBody AddSubjectDTO subject, @PathVariable Long id) {
-        classService.addSubject(subject, id);
+        if (classService.addSubject(subject, id) == 1) {
+            return new ResponseEntity<>( HttpStatus.NO_CONTENT);
+        }
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -187,10 +190,20 @@ public class ClassController {
         }
     }
 
+    @GetMapping(value = "/students/class/{id}")
+    public ResponseEntity getTeachers(@PathVariable Long id) {
+        List<User> students = classService.getStudents(id);
+        if (students.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(students, HttpStatus.OK);
+        }
+    }
+
     @GetMapping(value = "/schedule/{id}")
     public ResponseEntity getSchedule(@PathVariable Long id) {
         return new ResponseEntity<>(classService.getClassSchedule(id), HttpStatus.OK);
-
     }
+
 
 }

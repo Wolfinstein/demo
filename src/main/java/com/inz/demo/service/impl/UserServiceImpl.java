@@ -13,10 +13,7 @@ import com.inz.demo.util.DTOs.UserTeacherUpdateDTO;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -55,7 +52,9 @@ public class UserServiceImpl implements IUserService {
                 .build();
 
         if (user.getIsUserStudent()) {
-            user.setUserClass(classRepository.getOne(userDTO.getClassId()));
+            if (!user.getIsUserParent() && !user.getIsUserTeacher()) {
+                user.setUserClass(classRepository.getOne(userDTO.getClassId()));
+            }
         }
 
         userRepository.save(user);
@@ -168,19 +167,24 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public List<KidDTO> getPotentialKids() {
+    public List<KidDTO> getPotentialKids(Long id) {
+        List<KidDTO> dtos = new ArrayList<>();
         List<User> users = userRepository.findAll()
                 .stream()
                 .filter(user -> user.getRoles()
                         .equals("STUDENT"))
-                .collect(Collectors.toList());
-        List<KidDTO> dtos = new ArrayList<>();
+                .filter(user -> userKidRepository.findByKid_UserId(user.getUserId()).size() == 0
+                        || (userKidRepository.findByKid_UserId(user.getUserId()).size() > 0 &&
+                        userKidRepository.findByKid_UserId(user.getUserId()).get(0).getUser().getUserId().equals(id)))
+                        .collect(Collectors.toList());
+
         for (User u : users) {
             dtos.add(KidDTO.builder()
                     .name(u.getUserName() + " " + u.getUserSurname())
                     .id(u.getUserId())
                     .build());
         }
+
         return dtos;
     }
 

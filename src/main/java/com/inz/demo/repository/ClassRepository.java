@@ -11,4 +11,6 @@ public interface ClassRepository extends JpaRepository<Class, Long> {
     Optional<Class> findByClassId(Long id);
 
     Optional<Class> findByClassSign(String sign);
+
+
 }

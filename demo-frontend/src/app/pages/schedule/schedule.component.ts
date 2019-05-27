@@ -12,12 +12,17 @@ import {SubjectModel} from "../../models/subject.model";
 export class ScheduleComponent {
 
   map = new Map<number, SubjectModel[]>();
-
+  class: any;
 
   constructor(private classService: ClassService,
               private route: ActivatedRoute) {
     this.classService.getSchedule(this.route.snapshot.params['id']).subscribe(resp => {
       this.map = resp;
+    });
+
+    this.classService.getClass(this.route.snapshot.params['id']).subscribe(resp => {
+      this.class = resp;
     })
+
   }
 }

@@ -15,4 +15,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findByUserId(Long id);
 
     List<User> findAllByUserClassIsNotNull();
+
+    List<User> findAllByUserClass(Long id);
 }

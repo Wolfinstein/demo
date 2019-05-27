@@ -16,7 +16,8 @@ export class AppComponent implements OnInit {
               private userInfo: UserInfoService,) {
   }
 
-  user: any = this.userInfo.getUserInfo();
+  user: any;
+
   username: string = "";
 
   empty: boolean;
@@ -25,10 +26,16 @@ export class AppComponent implements OnInit {
   isLoggedIn: boolean = false;
 
   ngOnInit(): void {
-    this.isLoggedIn = this.userInfo.isLoggedIn();
-    this.userService.isNew(Number(this.userInfo.getUserInfo().userId)).subscribe(rsep => {
-      this.empty = rsep;
-    })
+    try {
+      this.user = this.userInfo.getUserInfo();
+      this.isLoggedIn = this.userInfo.isLoggedIn();
+      this.userService.isNew(Number(this.userInfo.getUserInfo().userId)).subscribe(resp => {
+        this.empty = resp;
+      })
+    } catch (e) {
+      this.isLoggedIn = false;
+      this.empty = false;
+    }
   }
 
   goToAccount() {

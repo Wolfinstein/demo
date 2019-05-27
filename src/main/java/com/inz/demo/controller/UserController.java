@@ -86,9 +86,9 @@ public class UserController {
         }
     }
 
-    @GetMapping(value = "/users/potentialKids")
-    public ResponseEntity getPotentialKids() {
-        List<KidDTO> dtos = userService.getPotentialKids();
+    @GetMapping(value = "/users/potentialKids/{id}")
+    public ResponseEntity getPotentialKids(@PathVariable("id") Long id) {
+        List<KidDTO> dtos = userService.getPotentialKids(id);
         if (dtos.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {

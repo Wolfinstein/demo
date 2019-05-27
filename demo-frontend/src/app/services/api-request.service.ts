@@ -53,7 +53,8 @@ export class ApiRequestService {
   post(url: string, body: Object, params?: HttpParams): Observable<any> {
     return this.http.post(this.appConfig.baseApiPath + url, JSON.stringify(body), {
       headers: this.getHeaders(),
-      params: params
+      params: params,
+      observe: 'response'
     })
   }
 

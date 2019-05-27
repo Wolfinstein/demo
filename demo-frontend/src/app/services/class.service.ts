@@ -122,4 +122,12 @@ export class ClassService {
     return this.apiRequest.post('subjects/add/' + id, subject);
   }
 
+  getStudentss(id : number) : Observable<any>{
+    return this.apiRequest.get('students/class/' + id);
+  }
+
+  getClass(id :number) : Observable<any> {
+    return this.apiRequest.get('class/show/' + id);
+  }
+
 }

@@ -21,7 +21,7 @@
       <mat-label>Select a class</mat-label>
       <mat-select [(ngModel)]="data.classId">
         <mat-option *ngFor="let class_ of classes"
-                    value="{{class_.id}}">{{class_.sign}}</mat-option>
+                    value="{{class_.id}}">{{class_.sign + " / " + class_.year}}</mat-option>
       </mat-select>
     </mat-form-field>
   </p>
@@ -55,6 +55,7 @@
     </mat-form-field>
   </p>
 
+  <p style="color: red; font-size: 12px">{{errMsg}}</p>
   <div mat-dialog-actions>
     <button class="button-edit" mat-stroked-button color="accent" (click)="onAdd()">Add</button>
   </div>

@@ -12,14 +12,17 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const expectedRole : string = route.data[1].expectedRole;
-    let url: string = state.url;
+    try {
+      const expectedRole: string = route.data[1].expectedRole;
+      let url: string = state.url;
 
-    if(expectedRole == this.userInfoService.getUserInfo().role || expectedRole == 'ALL'){
-      return this.checkLogin(url);
-    }
-    else {
-      this.router.navigate(['404']);
+      if (expectedRole == this.userInfoService.getUserInfo().role || expectedRole == 'ALL') {
+        return this.checkLogin(url);
+      } else {
+        this.router.navigate(['404']);
+      }
+    } catch (e) {
+      this.router.navigate(['home'])
     }
   }
 

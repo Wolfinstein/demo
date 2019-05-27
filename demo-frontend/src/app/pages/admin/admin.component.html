@@ -28,19 +28,19 @@
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Sign" [flexGrow]="0.2">
+        <ngx-datatable-column name="Sign" [flexGrow]="0.1">
           <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
             {{row.sign}}
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Subjects" [flexGrow]="0.2">
+        <ngx-datatable-column name="Subjects" [flexGrow]="0.1">
           <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
             {{row.subjectsAmount}}
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Students" [flexGrow]="0.2">
+        <ngx-datatable-column name="Students" [flexGrow]="0.1">
           <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
             {{row.studentsAmount}}
           </ng-template>
@@ -51,6 +51,7 @@
             <button mat-stroked-button color="accent" (click)="editClassPopup(row)">Edit</button>
             <button mat-stroked-button color="warn" (click)="deleteClass(row.id)">Delete</button>
             <button mat-stroked-button color="primary" [routerLink]="'/schedule/' + row.id">Schedule</button>
+            <button mat-raised-button color="primary" (click)="showStudents(row.id)"> Show List</button>
 
           </ng-template>
         </ngx-datatable-column>

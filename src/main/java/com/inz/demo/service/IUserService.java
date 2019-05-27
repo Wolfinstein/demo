@@ -28,7 +28,7 @@ public interface IUserService {
 
     UserDTOv2 convertUserToDTO(Long id);
 
-    List<KidDTO> getPotentialKids();
+    List<KidDTO> getPotentialKids(Long id);
 
     void editKids(Long id, String ids);
 

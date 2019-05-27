@@ -38,7 +38,7 @@ export class StudentComponent {
         var downloadURL = window.URL.createObjectURL(resp);
         var link = document.createElement('a');
         link.href = downloadURL;
-        link.download = "help.pdf";
+        link.download = "summary.pdf";
         link.click();
       }
     );

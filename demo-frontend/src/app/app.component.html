@@ -3,21 +3,21 @@
     <p class="brand-name" [routerLink]="'/dashboard'">HOME</p>
     <span class="spacer"></span>
     <div class="center-hrefs">
-      <button mat-button color="accent" *ngIf="isTeacher()" [routerLink]="'/teacher'">
+      <button class="header-pars" mat-button color="accent" *ngIf="isTeacher()" [routerLink]="'/teacher'">
         Teacher Panel
       </button>
-      <button mat-button color="accent" *ngIf="!isAdmin() && user?.isUserParent"
+      <button class="header-pars" mat-button color="accent" *ngIf="!isAdmin() && user?.isUserParent"
               [routerLink]="'/parent/' + user.userId">
         Parent Panel
       </button>
-      <button mat-button color="accent" *ngIf="isStudent()" [routerLink]="'/student/' + user.userId">
+      <button class="header-pars" mat-button color="accent" *ngIf="isStudent()" [routerLink]="'/student/' + user.userId">
         Student Panel
       </button>
-      <button mat-button [ngStyle]="{'color' : empty === true ? 'red' : 'white' }" color="accent" *ngIf="!isAdmin() && user?.isUserParent || !isAdmin() && user?.isUserStudent"
+      <button class="header-pars" mat-button [ngStyle]="{'color' : empty === true ? 'red' : 'white' }" color="accent" *ngIf="!isAdmin() && user?.isUserParent || !isAdmin() && user?.isUserStudent"
               [routerLink]="'/notifications/' + user.userId">
         Notifications
       </button>
-      <button mat-button color="accent" *ngIf="isAdmin()" [routerLink]="'/admin'">
+      <button class="header-pars" mat-button color="accent" *ngIf="isAdmin()" [routerLink]="'/admin'">
         Admin Panel
       </button>
     </div>
@@ -25,7 +25,7 @@
     <mat-icon color="accent" class="header-icon header-items" (click)="goToAccount()">
       account_circle
     </mat-icon>
-    <button mat-button color="accent" class="header-items" [routerLink]="'/logout'">
+    <button class="header-pars" mat-button color="accent" class="header-items" [routerLink]="'/logout'">
       Logout
     </button>
   </mat-toolbar-row>

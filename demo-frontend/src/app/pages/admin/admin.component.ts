@@ -7,6 +7,7 @@ import {EditKidsComponent} from "./edit-kids/edit.kids.component";
 import {EditUserComponent} from "./edit-user/edit.user.component";
 import {AddUserComponent} from "./add-user/add.user.component";
 import {AddSubjectComponent} from "./add-subject/add.subject.component";
+import {ShowStudentsComponent} from "./show-students/show.students.component";
 
 @Component({
   selector: 'admin-component',
@@ -15,11 +16,10 @@ import {AddSubjectComponent} from "./add-subject/add.subject.component";
 })
 
 export class AdminComponent {
-
   classesList: any[];
   userList: any[];
   subjectList: any[];
-  logs : any[];
+  logs: any[];
 
   constructor(private dialog: MatDialog,
               private classService: ClassService,
@@ -27,7 +27,7 @@ export class AdminComponent {
     this.getClasses();
     this.getUsers();
     this.getSubs();
-    this.userService.getLogs().subscribe(resp =>{
+    this.userService.getLogs().subscribe(resp => {
       this.logs = resp;
     })
   }
@@ -127,6 +127,17 @@ export class AdminComponent {
     let dialogRef = this.dialog.open(AddSubjectComponent, {
       panelClass: 'subject-add-component',
       data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getSubs();
+    });
+  }
+
+  showStudents(id: number) {
+    let dialogRef = this.dialog.open(ShowStudentsComponent, {
+      panelClass: 'show-students-component',
+      data: {id}
     });
 
     dialogRef.afterClosed().subscribe(result => {

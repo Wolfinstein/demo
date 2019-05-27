@@ -2,6 +2,7 @@ import {Component, Inject} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {UserService} from "../../../services/user.service";
 import {IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts} from "angular-2-dropdown-multiselect";
+import {UserInfoService} from "../../../services/user-info.service";
 
 @Component({
   selector: 'kids-edit-component',
@@ -21,7 +22,7 @@ export class EditKidsComponent {
               @Inject(MAT_DIALOG_DATA) public data: any,
               public dialogRef: MatDialogRef<EditKidsComponent>) {
     this.optionsModel = data.data.kidsIds;
-    this.userService.getPotentialKids().subscribe(resp => {
+    this.userService.getPotentialKids(this.data.data.id).subscribe(resp => {
       this.myOptions = resp;
     })
   }
@@ -41,12 +42,13 @@ export class EditKidsComponent {
     enableSearch: false,
     checkedStyle: 'fontawesome',
     buttonClasses: 'btn btn-default btn-block',
-    maxHeight: '200px',
+    maxHeight: '45vh',
     fixedTitle: true,
+    dynamicTitleMaxItems: 5,
     displayAllSelectedText: true
   };
 
-  // Text configuration
+// Text configuration
   myTexts: IMultiSelectTexts = {
     checkAll: 'Select all',
     uncheckAll: 'Unselect all',
@@ -55,7 +57,7 @@ export class EditKidsComponent {
     searchPlaceholder: 'Find',
     searchEmptyResult: 'Nothing found...',
     searchNoRenderText: 'Type in search box to see results...',
-    defaultTitle: 'Filter by tags',
+    defaultTitle: 'Choose kids',
     allSelected: 'All selected',
   };
 

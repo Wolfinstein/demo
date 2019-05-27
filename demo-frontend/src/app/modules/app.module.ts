@@ -50,6 +50,7 @@ import {EditUserComponent} from "../pages/admin/edit-user/edit.user.component";
 import {AddUserComponent} from "../pages/admin/add-user/add.user.component";
 import {ScheduleComponent} from "../pages/schedule/schedule.component";
 import {AddSubjectComponent} from "../pages/admin/add-subject/add.subject.component";
+import {ShowStudentsComponent} from "../pages/admin/show-students/show.students.component";
 
 
 @NgModule({
@@ -78,9 +79,10 @@ import {AddSubjectComponent} from "../pages/admin/add-subject/add.subject.compon
     EditUserComponent,
     AddUserComponent,
     ScheduleComponent,
-    AddSubjectComponent
+    AddSubjectComponent,
+    ShowStudentsComponent
   ],
-  entryComponents: [AddSubjectComponent, GradePopupComponent, LoginComponent, UpdateTeacherComponent, NewGradePopupComponent, ChangeTopicPopupComponent, ChangePresenceComponent, SendNotificationPopupComponent, EditClassComponent, EditKidsComponent, EditUserComponent, AddUserComponent],
+  entryComponents: [ShowStudentsComponent, AddSubjectComponent, GradePopupComponent, LoginComponent, UpdateTeacherComponent, NewGradePopupComponent, ChangeTopicPopupComponent, ChangePresenceComponent, SendNotificationPopupComponent, EditClassComponent, EditKidsComponent, EditUserComponent, AddUserComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

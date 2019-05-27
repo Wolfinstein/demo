@@ -18,7 +18,6 @@ export class EditUserComponent {
   }
 
   editUser(): void {
-    console.log(this.data.data);
     this.userService.editUser(this.data.data.id, this.data.data).subscribe(resp => {
         this.dialogRef.close();
       }

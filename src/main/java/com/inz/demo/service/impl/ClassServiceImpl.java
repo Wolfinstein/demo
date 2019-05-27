@@ -43,15 +43,30 @@ public class ClassServiceImpl implements IClassService {
     }
 
     @Override
-    public void addSubject(AddSubjectDTO subjectDTO, Long classId) {
+    public int addSubject(AddSubjectDTO subjectDTO, Long classId) {
+        User teacher = userRepository.findByUserId(subjectDTO.getTeacherId());
         Subject subject = Subject.builder()
                 .name(subjectDTO.getName())
                 .subjectDay(subjectDTO.getDay())
                 .subjectHour(subjectDTO.getHour())
-                .teacher(userRepository.findByUserId(subjectDTO.getTeacherId()))
+                .teacher(teacher)
                 .subjectClass(classRepository.findByClassId(classId).get())
                 .build();
-        subjectRepository.save(subject);
+
+        List<Subject> teacherSubjects = subjectRepository.findByTeacherUserId(teacher.getUserId());
+        boolean flag = true;
+        for (Subject s : teacherSubjects) {
+            if (s.getSubjectHour() == subjectDTO.getHour() && s.getSubjectDay() == subjectDTO.getDay()) {
+                flag = false;
+            }
+        }
+
+        if (flag) {
+            subjectRepository.save(subject);
+            return 0;
+        } else {
+            return 1;
+        }
     }
 
     @Override
@@ -269,7 +284,22 @@ public class ClassServiceImpl implements IClassService {
 
     @Override
     public List<User> getTeachers() {
-        return userRepository.findAll().stream().filter(user -> user.getRoles().equals("TEACHER")).collect(Collectors.toList());
+        List<User> teachers = userRepository.findAll()
+                .stream()
+                .filter(user -> user.getRoles().equals("TEACHER"))
+                .collect(Collectors.toList());
+        List<User> alreadyPerceptors = new ArrayList<>();
+        List<Class> classes = classRepository.findAll();
+
+        for (User u : teachers) {
+            for (Class c : classes) {
+                if (c.getPreceptor() == u) {
+                    alreadyPerceptors.add(u);
+                }
+            }
+        }
+        teachers.removeAll(alreadyPerceptors);
+        return teachers;
     }
 
     @Override
@@ -306,5 +336,9 @@ public class ClassServiceImpl implements IClassService {
         subjectRepository.deleteById(id);
     }
 
+    @Override
+    public List<User> getStudents(Long id) {
+        return userRepository.findAllByUserClassIsNotNull().stream().filter(user -> user.getUserClass().getClassId().equals(id)).collect(Collectors.toList());
+    }
 
 }

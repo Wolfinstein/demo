@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface IClassService {
     void createClass();
 
-    void addSubject(AddSubjectDTO subjectDTO, Long classId);
+    int addSubject(AddSubjectDTO subjectDTO, Long classId);
 
     void deleteClass(Long id);
 
@@ -49,4 +49,6 @@ public interface IClassService {
     Optional<Subject> getSubject(Long id);
 
     void deleteSubject(Long id);
+
+    List<User> getStudents(Long id);
 }

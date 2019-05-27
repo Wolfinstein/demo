@@ -14,6 +14,7 @@ export class AddSubjectComponent {
 
   classes: any[];
   teachers: any[];
+  errMsg: string = "";
 
   constructor(private userService: UserService,
               private classService: ClassService,
@@ -30,11 +31,13 @@ export class AddSubjectComponent {
   }
 
   onAdd(): void {
-    console.log(this.data);
-    this.classService.addSubject(this.data.classId, this.data).subscribe(resp => {
+    this.classService.addSubject(this.data.classId, this.data).subscribe(response => {
+      if (response.status != 201) {
+        this.errMsg = "There is already subject on this date for this teacher."
+      } else {
         this.dialogRef.close();
       }
-    );
+    });
   }
 
 }

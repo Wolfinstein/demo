@@ -1,5 +1,5 @@
 @import '~@angular/material/theming';
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import '~@swimlane/ngx-datatable/release/index.css';
 @import '~@swimlane/ngx-datatable/release/themes/material.css';
 @import '~@swimlane/ngx-datatable/release/assets/icons.css';
@@ -63,8 +63,8 @@
 .kids-edit-component .mat-dialog-container {
   border-radius: 5px;
   padding: 0 !important;
-  width: 20vh;
-  height: 35vh;
+  width: 35vh;
+  height: 50vh;
   box-shadow: 0 0 5px rgb(0, 5, 0);
 }
 
@@ -77,3 +77,10 @@
   box-shadow: 0 0 5px rgb(0, 5, 0);
 }
 
+.show-students-component .mat-dialog-container {
+  border-radius: 5px;
+  padding: 0 !important;
+  width: 60vh;
+  height: 65vh;
+  box-shadow: 0 0 5px rgb(0, 5, 0);
+}

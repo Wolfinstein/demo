@@ -9,8 +9,8 @@ import {UserInfoService} from '../../services/user-info.service';
 
 export class LogoutComponent {
   constructor(private userInfoService: UserInfoService, private route: Router) {
-    this.userInfoService.removeUserInfo();
     this.route.navigate(['/home']);
+    this.userInfoService.removeUserInfo();
     location.reload();
   }
 }
