@@ -3,24 +3,24 @@ package com.inz.demo.util;
 import com.inz.demo.domain.Grade;
 import com.inz.demo.domain.Subject;
 import com.inz.demo.domain.User;
-import com.inz.demo.repository.ClassRepository;
-import com.inz.demo.repository.GradeRepository;
-import com.inz.demo.repository.PresenceRepository;
-import com.inz.demo.repository.SubjectRepository;
+import com.inz.demo.repository.*;
 import com.inz.demo.service.IUserService;
 import com.inz.demo.service.impl.UserServiceImpl;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import javafx.scene.control.Cell;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalDouble;
+import java.util.stream.Collectors;
 
 @Service
 public class GetPdfReport {
@@ -30,13 +30,15 @@ public class GetPdfReport {
 
     private final IUserService userService;
     private final SubjectRepository subjectRepository;
+    private final UserRepository userRepository;
     private final GradeRepository gradeRepository;
     private final PresenceRepository presenceRepository;
     private final ClassRepository classRepository;
 
-    public GetPdfReport(UserServiceImpl userService, SubjectRepository subjectRepository, GradeRepository gradeRepository, PresenceRepository presenceRepository, ClassRepository classRepository) {
+    public GetPdfReport(UserServiceImpl userService, SubjectRepository subjectRepository, UserRepository userRepository, GradeRepository gradeRepository, PresenceRepository presenceRepository, ClassRepository classRepository) {
         this.userService = userService;
         this.subjectRepository = subjectRepository;
+        this.userRepository = userRepository;
         this.gradeRepository = gradeRepository;
         this.presenceRepository = presenceRepository;
         this.classRepository = classRepository;
@@ -251,4 +253,76 @@ public class GetPdfReport {
 
         return new ByteArrayInputStream(out.toByteArray());
     }
+
+
+    public ByteArrayInputStream teacherReport(Long subjectId) throws NullPointerException {
+
+        Document document = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+        try {
+            Subject subject = subjectRepository.getOne(subjectId);
+            List<User> students = userRepository
+                    .findAllByUserClassIsNotNull()
+                    .stream()
+                    .filter(user -> user.getUserClass() == subject.getSubjectClass())
+                    .collect(Collectors.toList());
+
+            Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 25f);
+            Paragraph paragraph = new Paragraph(subject.getName(), titleFont);
+            Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+
+            paragraph.setAlignment(Element.ALIGN_CENTER);
+            PdfPTable table = new PdfPTable(2);
+            table.setSpacingAfter(30f);
+            table.setSpacingBefore(40f);
+            table.setWidthPercentage(80);
+            table.setWidths(new int[]{5, 5});
+
+            PdfPCell cell;
+            PdfPCell hcell;
+
+            hcell = new PdfPCell(new Phrase("Full Name: ", headFont));
+            hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(hcell);
+
+            hcell = new PdfPCell(new Phrase("Grades: ", headFont));
+            hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(hcell);
+
+            for (User u : students) {
+
+                cell = new PdfPCell(new Phrase(u.getUserName() + " " + u.getUserSurname()));
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(cell);
+
+                List<Grade> gradesList = gradeRepository.findByStudent_UserIdAndSubject_SubjectId(u.getUserId(), subject.getSubjectId());
+                StringBuilder grades = new StringBuilder();
+                for (Grade grade : gradesList) {
+                    grades.append(grade.getGradeValue().toString()).append(", ");
+                }
+
+                cell = new PdfPCell(new Phrase(grades.toString()));
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(cell);
+            }
+
+            PdfWriter.getInstance(document, out);
+            document.open();
+
+            document.add(paragraph);
+            document.addTitle(subject.getName());
+            document.add(table);
+
+            document.close();
+
+        } catch (DocumentException ex) {
+        }
+
+        return new ByteArrayInputStream(out.toByteArray());
+    }
+
+
 }

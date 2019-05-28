@@ -51,4 +51,6 @@ public interface IClassService {
     void deleteSubject(Long id);
 
     List<User> getStudents(Long id);
+
+    List<User> getTeachersShort();
 }

@@ -17,6 +17,7 @@ export class ScheduleComponent {
   constructor(private classService: ClassService,
               private route: ActivatedRoute) {
     this.classService.getSchedule(this.route.snapshot.params['id']).subscribe(resp => {
+      console.log(resp);
       this.map = resp;
     });
 

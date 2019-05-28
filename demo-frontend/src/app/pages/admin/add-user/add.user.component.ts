@@ -17,6 +17,7 @@ export class AddUserComponent {
   userForm: FormGroup;
   submitted: boolean = false;
   classes: any[];
+  errMsg: string = "";
 
   constructor(private userService: UserService,
               private classService: ClassService,
@@ -56,6 +57,12 @@ export class AddUserComponent {
     } else {
       this.userService.addUser(this.userForm.getRawValue()).subscribe(resp => {
           this.dialogRef.close();
+        }, error1 => {
+          if (error1.status == 406) {
+            this.errMsg = 'Student needs a class';
+          } else if (error1.status == 409) {
+            this.errMsg = 'User needs at least one role';
+          }
         }
       );
     }

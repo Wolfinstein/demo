@@ -78,6 +78,10 @@ export class ClassService {
     return this.apiRequest.download('studentReport/' + id)
   }
 
+  getTeacherStats(id: number): Observable<any> {
+    return this.apiRequest.download('teacherReport/' + id);
+  }
+
   getStudentAbsences(id: number): Observable<any> {
     return this.apiRequest.get('students/absences/' + id);
   }
@@ -96,6 +100,10 @@ export class ClassService {
 
   getTeachers(): Observable<any> {
     return this.apiRequest.get('students/teachers')
+  }
+
+  getTeachersShort(): Observable<any>{
+    return this.apiRequest.get('teachers/dropdown');
   }
 
   deleteClass(id: number): Observable<any> {
@@ -122,12 +130,15 @@ export class ClassService {
     return this.apiRequest.post('subjects/add/' + id, subject);
   }
 
-  getStudentss(id : number) : Observable<any>{
+  getStudentss(id: number): Observable<any> {
     return this.apiRequest.get('students/class/' + id);
   }
 
-  getClass(id :number) : Observable<any> {
+  getClass(id: number): Observable<any> {
     return this.apiRequest.get('class/show/' + id);
   }
 
+  getSubject(id: number): Observable<any> {
+    return this.apiRequest.get('subject/' + id);
+  }
 }

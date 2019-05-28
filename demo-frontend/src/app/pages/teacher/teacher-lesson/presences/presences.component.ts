@@ -28,6 +28,7 @@ export class PresencesComponent {
 
   getPresences() {
     this.classService.getPresences(Number(this.route.snapshot.params['id'])).subscribe(resp => {
+      console.log(resp)
       this.presencesList = [...resp];
     })
   }

@@ -38,4 +38,20 @@ public class PDFController {
                 .body(new InputStreamResource(bis));
     }
 
+    @RequestMapping(value = "/teacherReport/{id}", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> pdfSubjectReport(@PathVariable Long id) throws IOException {
+
+        ByteArrayInputStream bis = getPdfReport.teacherReport(id);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=teacherReport.pdf");
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(bis));
+    }
+
 }

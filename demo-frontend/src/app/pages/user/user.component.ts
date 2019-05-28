@@ -11,7 +11,7 @@ import {TeacherUpdateModel} from "../../models/teacher.update";
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
 })
-export class UserAccountComponent implements OnInit {
+export class UserAccountComponent {
 
   sessionUser: any;
   user: any;
@@ -20,14 +20,17 @@ export class UserAccountComponent implements OnInit {
               private userService: UserService,
               private router: Router,
               private dialog: MatDialog) {
+
+    this.sessionUser = this.userInfoService.getUserInfo();
+    this.getUser();
   }
 
-  ngOnInit() {
-    this.sessionUser = this.userInfoService.getUserInfo();
+  getUser() {
     this.userService.getUser(this.sessionUser['userId']).subscribe(response => {
       this.user = response;
     });
   }
+
 
   updateTeacherPopup() {
     let updateTeacherModel: TeacherUpdateModel = new TeacherUpdateModel(
@@ -39,6 +42,7 @@ export class UserAccountComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.getUser();
     });
   }
 

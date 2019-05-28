@@ -190,6 +190,18 @@ public class ClassController {
         }
     }
 
+    @GetMapping(value = "/teachers/dropdown")
+    public ResponseEntity getTeachersShort() {
+        List<User> teachers = classService.getTeachersShort();
+        if (teachers.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(teachers, HttpStatus.OK);
+        }
+    }
+
+
+
     @GetMapping(value = "/students/class/{id}")
     public ResponseEntity getTeachers(@PathVariable Long id) {
         List<User> students = classService.getStudents(id);
@@ -203,6 +215,11 @@ public class ClassController {
     @GetMapping(value = "/schedule/{id}")
     public ResponseEntity getSchedule(@PathVariable Long id) {
         return new ResponseEntity<>(classService.getClassSchedule(id), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/subject/{id}")
+    public ResponseEntity getSubject(@PathVariable Long id) {
+        return new ResponseEntity<>(classService.getSubject(id), HttpStatus.OK);
     }
 
 

@@ -25,7 +25,7 @@ export class AddSubjectComponent {
       this.classes = resp;
     });
 
-    this.classService.getTeachers().subscribe(resp => {
+    this.classService.getTeachersShort().subscribe(resp => {
       this.teachers = resp;
     })
   }

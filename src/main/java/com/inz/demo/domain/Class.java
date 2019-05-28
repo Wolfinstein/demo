@@ -27,7 +27,7 @@ public class Class {
     @Column(name = "class_year")
     private int classYear;
 
-    @Column(name = "class_sign", length = 2)
+    @Column(name = "class_sign")
     private String classSign;
 
     @JsonIgnore

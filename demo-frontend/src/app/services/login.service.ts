@@ -32,20 +32,21 @@ export class LoginService {
 
     this.apiRequest.post('session', bodyData)
       .subscribe(response => {
-          if (response !== undefined && response !== null && response.operationStatus === "SUCCESS") {
+          console.log(response);
+          if (response.status == 200) {
             loginInfoReturn = {
               "success": true,
               "message": 'success',
               "landingPage": this.landingPage,
               "user": {
-                "userId": response.item.userId,
-                "email": response.item.email,
-                "displayName": response.item.firstName + " " + response.item.lastName,
-                "token": response.item.token,
-                "role": response.item.role,
-                "isUserTeacher": response.item.userTeacher,
-                "isUserStudent": response.item.userStudent,
-                "isUserParent": response.item.userParent
+                "userId": response.body.item.userId,
+                "email": response.body.item.email,
+                "displayName": response.body.item.firstName + " " + response.body.item.lastName,
+                "token": response.body.item.token,
+                "role": response.body.item.role,
+                "isUserTeacher": response.body.item.userTeacher,
+                "isUserStudent": response.body.item.userStudent,
+                "isUserParent": response.body.item.userParent
               }
             };
             this.userInfoService.storeUserInfo(JSON.stringify(loginInfoReturn.user));

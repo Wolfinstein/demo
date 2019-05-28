@@ -303,6 +303,17 @@ public class ClassServiceImpl implements IClassService {
     }
 
     @Override
+    public List<User> getTeachersShort() {
+        List<User> teachers = userRepository.findAll()
+                .stream()
+                .filter(user -> user.getRoles().equals("TEACHER"))
+                .collect(Collectors.toList());
+        return teachers;
+    }
+
+
+
+    @Override
     public Map<Integer, List<Subject>> getClassSchedule(Long id) {
         Map<Integer, List<Subject>> map = new HashMap<>();
         for (int i = 1; i < 6; i++) {
@@ -312,7 +323,7 @@ public class ClassServiceImpl implements IClassService {
                 final int w = j;
                 if (subjects.stream().filter(subject -> subject.getSubjectHour() == w).collect(Collectors.toList()).isEmpty()) {
                     filtered.add(Subject.builder()
-                            .name("empty")
+                            .name("-")
                             .subjectHour(j)
                             .subjectDay(i)
                             .teacher(null)

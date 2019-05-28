@@ -39,9 +39,16 @@
       </ng-template>
     </ngx-datatable-column>
 
-    <ngx-datatable-column [flexGrow]="0.50">
+    <ngx-datatable-column [flexGrow]="0.30">
       <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
         <button mat-raised-button color="warn" [routerLink]="'/lesson/' + row.id">Show
+        </button>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column [flexGrow]="0.30">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <button mat-raised-button color="accent" (click)="getReport(row.id)">Report
         </button>
       </ng-template>
     </ngx-datatable-column>

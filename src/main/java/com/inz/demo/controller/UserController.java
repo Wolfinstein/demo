@@ -30,6 +30,8 @@ public class UserController {
     public ResponseEntity create(@RequestBody UserDTO form) {
         if (userService.findUserByLogin(form.getLogin()).isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        } else if (!form.getIsUserParent() && !form.getIsUserStudent() && !form.getIsUserTeacher()) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         } else {
             userService.createUser(form);
             return new ResponseEntity<>(HttpStatus.CREATED);

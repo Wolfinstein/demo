@@ -23,15 +23,22 @@ export class LessonComponent {
 
   lessonsList: any[];
   studentsList: any[];
+  subject: any;
 
   constructor(private classService: ClassService,
               private userInfo: UserInfoService,
               private route: ActivatedRoute,
               private dialog: MatDialog) {
 
-
+    this.getClass();
     this.getStudents();
     this.getLessons();
+  }
+
+  getClass() {
+    this.classService.getSubject(Number(this.userInfo.getUserInfo().userId)).subscribe(resp => {
+      this.subject = resp;
+    })
   }
 
   getLessons() {

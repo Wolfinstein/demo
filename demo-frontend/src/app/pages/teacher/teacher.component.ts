@@ -24,5 +24,15 @@ export class TeacherComponent {
     })
   }
 
+  getReport(id: number) {
+    this.classService.getTeacherStats(id).subscribe(resp => {
+        var downloadURL = window.URL.createObjectURL(resp);
+        var link = document.createElement('a');
+        link.href = downloadURL;
+        link.download = "teacherReport.pdf";
+        link.click();
+      }
+    );
+  }
 
 }
